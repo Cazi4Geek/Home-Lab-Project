@@ -27,7 +27,7 @@ This project not only showcases my technical expertise in IT infrastructure mana
 
 In this homelab setup, we will be using Hyper-V to create a virtualized environment. The primary components of this setup will include:
 
-![Equipment](images/equipment.png)
+<img width="439" height="390" alt="Image" src="https://github.com/user-attachments/assets/5c84ac77-1325-4086-8655-dedd4cf8234f" />
 
 1. **Three Servers**:
     - One server (Windows Server 2022) will act as the **Domain Controller (DC)**, responsible for managing the Active Directory (AD) and handling authentication and authorization within the domain.
@@ -52,7 +52,7 @@ In this homelab setup, we will be using Hyper-V to create a virtualized environm
 
 To keep our domain structure well-organized, we will create Organizational Units (OUs) for each department. This will help us manage users, computers, and other resources efficiently within Active Directory. The following OUs will be created:
      
-![Organizational Units](images/organizational-units.png)
+<img width="502" height="452" alt="Image" src="https://github.com/user-attachments/assets/f8fcc1d8-ef14-41f7-ab22-f4739e77ca54" />
 
 1. **IT** - Contains users such as IT Support, Sysadmins, and Network Engineers.
 2. **Finance** - Contains users such as Finance Managers and Finance Analysts.
