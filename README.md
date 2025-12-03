@@ -22,3 +22,7 @@ This project not only showcases my technical expertise in IT infrastructure mana
 12. [Project Conclusion](#project-conclusion)
 
 -----------------------------------------------------------------------------------------------------
+## Homelab Creation
+
+In this homelab setup, we will be using Hyper-V to create a virtualized environment. The primary components of this setup will include:
+
