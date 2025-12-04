@@ -27,3 +27,8 @@ This project not only showcases my technical expertise in IT infrastructure mana
 In this homelab setup, we will be using Hyper-V to create a virtualized environment. The primary components of this setup will include:
 <img width="1344" height="768" alt="Image" src="https://github.com/user-attachments/assets/77bd7656-d959-4d80-9eab-a6cbbaf0135f" />
 
+1. **Four Servers**:
+    - One server (Windows Server 2022) will act as the **Domain Controller (DC01)**, responsible for managing the Active Directory (AD) and handling authentication and authorization within the domain.
+    - The second server (Windows Server 2022) will be used for other purposes such as file storage, applications, or additional services required within the network(FS01).
+    - The third server (Windows Server 2022) will be used for other purposes such as database system, with a few test records(DB01).
+    - Additionally, a Linux server will be implemented to run Docker with simple web page. 
