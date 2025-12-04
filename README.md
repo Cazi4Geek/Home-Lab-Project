@@ -25,4 +25,5 @@ This project not only showcases my technical expertise in IT infrastructure mana
 ## Homelab Creation
 
 In this homelab setup, we will be using Hyper-V to create a virtualized environment. The primary components of this setup will include:
+<img width="1344" height="768" alt="Image" src="https://github.com/user-attachments/assets/77bd7656-d959-4d80-9eab-a6cbbaf0135f" />
 
