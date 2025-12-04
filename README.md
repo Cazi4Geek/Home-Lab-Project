@@ -31,4 +31,16 @@ In this homelab setup, we will be using Hyper-V to create a virtualized environm
     - One server (Windows Server 2022) will act as the **Domain Controller (DC01)**, responsible for managing the Active Directory (AD) and handling authentication and authorization within the domain.
     - The second server (Windows Server 2022) will be used for other purposes such as file storage, applications, or additional services required within the network(FS01).
     - The third server (Windows Server 2022) will be used for other purposes such as database system, with a few test records(DB01).
-    - Additionally, a Linux server will be implemented to run Docker with simple web page. 
+    - Additionally, a Linux server will be implemented to run Docker with simple web page.
+2. **Four Client Machines**:
+    - These machines will be used to simulate end-user workstations within the network. Each machine will be joined to the domain controlled by the Domain Controller.
+  
+    - Naming Convention
+        - Prefix: Client
+        - Unique Number: 001, 002, 003, 004
+
+        Detailed Naming List:
+        1. Client-001
+        2. Client-002
+        3. Client-003
+        4. Client-004
