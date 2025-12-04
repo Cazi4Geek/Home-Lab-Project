@@ -44,3 +44,7 @@ In this homelab setup, we will be using Hyper-V to create a virtualized environm
         2. Client-002
         3. Client-003
         4. Client-004
+### Organizational Units (OUs) for Departments
+
+To keep our domain structure well-organized, we will create Organizational Units (OUs) for each department. This will help us manage users, computers, and other resources efficiently within Active Directory. The following OUs will be created:
+     
