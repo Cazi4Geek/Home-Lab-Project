@@ -47,4 +47,24 @@ In this homelab setup, we will be using Hyper-V to create a virtualized environm
 ### Organizational Units (OUs) for Departments
 
 To keep our domain structure well-organized, we will create Organizational Units (OUs) for each department. This will help us manage users, computers, and other resources efficiently within Active Directory. The following OUs will be created:
-     
+<img width="502" height="452" alt="Image" src="https://github.com/user-attachments/assets/f13e0d1e-a06c-41ab-bfe9-aa1b1d8ffa9d" />
+
+1. **IT** - Contains users such as IT Support, Sysadmins, and Network Engineers.
+2. **Finance** - Contains users such as Finance Managers and Finance Analysts.
+3. **Sales** - Contains Sales Representatives.
+4. **HR** - Contains the HR Manager and related personnel.
+5. **Marketing** - Contains Marketing Specialists and Content Writers.
+6. **Development** - Contains Developers and DevOps Engineers.
+7. **Customer Service** - Contains Customer Service Representatives.
+8. **Design** - Contains Graphic Designers.
+9. **Administration** - Contains the Office Manager and administrative staff.
+
+### Summary of Steps
+
+| Step | Description |
+|------|-------------|
+| **1. Set up Hyper-V on your host machine** |   |
+|     1.1 | **Install Hyper-V**: Open the Control Panel, navigate to Programs > Programs and Features > Turn Windows features on or off, check the box for Hyper-V, click OK, and restart your computer. <br/><br/> <img width="1052" height="936" alt="Image" src="https://github.com/user-attachments/assets/d32e20fd-df5a-4964-8359-30d90abc5b51" /> |
+|     1.2 | **Configure Hyper-V**: Open Hyper-V Manager from the Start menu, select your host machine, and configure virtual switches by going to Virtual Switch Manager in the right-hand Actions menu. Create a new External virtual switch to allow VMs to access your physical network. <br/><br/> <img width="1442" height="1368" alt="Image" src="https://github.com/user-attachments/assets/bcd3eb97-f6d9-459e-829b-17b11d53e5b9" />|
+| **2. Create Virtual Machines** |   |
+|     2.1 | **Create the Domain Controller VM**: In Hyper-V Manager, click New > Virtual Machine, and follow the wizard to set up the VM with appropriate settings such as name, generation, memory, network, and virtual hard disk. Install an operating system later. <br/> In my case, I'm going to choose to change the default path to store the virtual machine, as it seems more organized to me. In this case, I'll opt to place it in C:\Hyper-V\VMs\\. <br/><br/> <img width="1404" height="1060" alt="Image" src="https://github.com/user-attachments/assets/9ebc2568-b066-4932-a576-3e07fd577fe2" /> <br/><br/> Afterwards, I select Generation 1, as Generation 2 can be prone to errors. <br/><br/> <img width="1406" height="1060" alt="Image" src="https://github.com/user-attachments/assets/15f9f4c2-0509-4c77-a858-4a35cc129302" /> <br/><br/> Now, I need to allocate the RAM to the virtual machine. In this case, I'll opt for the minimum recommended for Windows Server 2022 with Desktop Experience, which is 4GB (4096 MB). <br/> Additionally, I'll choose to leave the **'Use dynamic memory for this virtual machine'** checkbox checked. <br> When a virtual machine uses dynamic memory, it means that its memory allocation can adjust automatically based on the demand from the operating system and applications running within the virtual machine. Instead of assigning a fixed amount of memory, the virtual machine can request and release memory as needed, allowing for more efficient utilization of host resources. <br/><br/> <img width="1406" height="1066" alt="Image" src="https://github.com/user-attachments/assets/722357ba-379b-4679-8389-2d072e3d73b8" /> <br/><br/> Then, I select the network adapter to which the virtual machine will connect. In this case, it's the network adapter created in step 1.2 (WAN), which is associated with my Qualcomm Atheros QCA9377 wireless network card. <br/><br/> ![DC01-4](images/dc01-4.PNG) <br/><br/> Next, I will create a virtual hard disk of 2TB (2048GB), which will be more than enough for any practice you may want to perform. <br/><br/> ![DC01-5](images/dc01-5.PNG) <br/><br/> Finally, I select the option 'Install an operating system from a bootable CD/DVD-ROM' and locate the location of the .ISO file containing the Windows Server 2022 Operating System. <br/><br/> ![DC01-6](images/dc01-6.PNG) <br/><br/> Once this is done, the virtual machine is successfully created. Now, all that's left is to connect to it, start it up, and follow the Windows Server installer. <br/><br/> ![DC01-7](images/dc01-7.PNG) |
