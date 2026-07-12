@@ -83,5 +83,174 @@ To keep our domain structure well-organized, we will create Organizational Units
 | **6. Create Organizational Units (OUs) in Active Directory for each department** |   |
 |     6.1 | **Open Active Directory Users and Computers (ADUC) on DC1**: Go to Server Manager > Tools > Active Directory Users and Computers (ADUC) or Active Directory Administrative Center (ADAC). <br/><br/> **1 - ADAC (Active Directory Administrative Center):** <br/><br/> ![ADAC1]<img width="2560" height="1600" alt="Image" src="https://github.com/user-attachments/assets/09050af7-ed91-4314-8cd9-c907c833007b" /> <br/><br/> **Modern User Interface**: ADAC has a more modern and intuitive user interface, based on PowerShell and Windows Presentation Foundation (WPF) technologies. It was introduced with Windows Server 2008 R2. <br/><br/> **Advanced Features**: It offers advanced features such as the Active Directory Recycle Bin, which allows the recovery of deleted objects without having to restore the entire system. It enables more easily configurable Role-Based Access Control (RBAC). It incorporates PowerShell Search and command history, which facilitates task automation. <br/><br/> **Improved Security**: It supports smart card authentication and other enhanced authentication methods. <br/><br/> **Simplified Management**: It provides a consolidated and simplified view to manage Active Directory objects, such as users, groups, organizational units, and others. <br/><br/> **2 - ADUC (Active Directory Users and Computers):** <br/><br/> ![ADUC-1]<img width="2560" height="1600" alt="Image" src="https://github.com/user-attachments/assets/0ce8d3a0-911a-41d1-8f0c-2445b6ca5213" /> <br/><br/> **Classic User Interface**: ADUC has a more traditional user interface, based on the Microsoft Management Console (MMC) snap-in. It is an older tool compared to ADAC and has been used since Windows 2000. <br/><br/> **Basic Features**: It allows basic management of users, groups, computers, and organizational units in Active Directory. It does not have direct access to some of the more advanced features available in ADAC, such as the AD Recycle Bin. <br/><br/> **Common Use in Classic Scenarios**: Although it is more basic, it is still widely used for daily administration tasks due to its familiarity and simplicity. <br/><br/> **Compatibility**: It is compatible with earlier versions of Windows Server and remains a reliable tool for direct management of objects in Active Directory. <br/><br/> |
 |     6.2 | **Create OUs**: Right-click on the domain (e.g., jmsoft.local) and select New > Organizational Unit. Create OUs for each department (e.g., IT, Finance, Sales, HR, Marketing, Development, Customer Service, Design, Administration). <br/><br/> To create organizational units (OUs), I have two options: do it from Active Directory Users and Computers (ADUC) or from Active Directory Administrative Center (ADAC): <br/><br/> **1 - Create from Active Directory Users and Computers (ADUC)**: To do this, I go to Server Manager, Tools, and select Active Directory Users and Computers. Then, once inside ADUC, I expand the domain (jmfsoft.local) and select where I want to create the organizational unit. <br/><br/> ![OU-1]<img width="2560" height="1600" alt="Image" src="https://github.com/user-attachments/assets/e2cd7d01-bf00-491a-9449-bf8296b21402" /> <br/><br/> It is important to note that organizational units (OUs) cannot be created within containers, nor can group policies (GP) be applied to them. In this case, I will create an organizational unit called 'Argentina' within the domain and then create within it all the OUs related to the departments of the company at the Argentina site (assuming it is a company with many locations): <br/><br/> ![OU-2]<img width="2560" height="1600" alt="Image" src="https://github.com/user-attachments/assets/d4822860-66f8-4cd4-b42a-82047c3f5232" /> <br/><br/> **2 - Create from Active Directory Administrative Center (ADAC)**: To do this, I go to Server Manager, Tools, and select Active Directory Administrative Center. Then, once inside, I select the location, right-click, New, and select 'Organizational Unit'. <br/><br/> ![ADAC-2]<img width="2560" height="1600" alt="Image" src="https://github.com/user-attachments/assets/9f9086bf-e29a-46f7-8bf4-289e2a2910c0" /> <br/><br/> Then, I complete the creation of the company's organizational units (IT, HR, Finance, etc.). <br/><br/> ![ADAC-3]<img width="2560" height="1600" alt="Image" src="https://github.com/user-attachments/assets/6af4dae0-9036-4a17-9957-3010983b6b4a" /> <br/><br/> |
-|     6.3 | **Move user accounts to OUs**: After creating user accounts, move each account to the appropriate OU by right-clicking on the user, selecting Move, and choosing the appropriate OU. <br/><br/> Although user creation is part of the next section, I will create a test user and move it to a previously created organizational unit (in this case, IT) just to complete point 6.3 and finish with section 1 (Homelab Creation). <br/><br/> In this case, I will create the user named 'Prueba' in Customer Service and then move it to the IT Organizational Unit. <br/><br/> ![NewUser]<img width="2560" height="1600" alt="Image" src="https://github.com/user-attachments/assets/80b57cc4-3cca-4df8-b1dd-a7e88e2eedef" /> <br/><br/> Then, to move the user, I simply right-click on it and select 'Move...'. Now, I just need to choose which organizational unit (OU) to move it to. In this case, I will move it to IT: <br/><br/> ![NewUser2]<img width="2560" height="1600" alt="Image" src="https://github.com/user-attachments/assets/47f5c40f-ba06-4c7e-a031-decd9df77382" /> <br/><br/> Once done, the user has been successfully moved from 'Customer Service' to 'IT'. <br/><br/> ![NewUser3]<img width="2560" height="1600" alt="Image" src="https://github.com/user-attachments/assets/b2890311-6ceb-4c5a-98f2-311154d35cd5" /> |
+|     6.3 | **Move user accounts to OUs**: After creating user accounts, move each account to the appropriate OU by right-clicking on the user, selecting Move, and choosing the appropriate OU. <br/><br/> Although user creation is part of the next section, I will create a test user and move it to a previously created organizational unit (in this case, IT) just to complete point 6.3 and finish with section 1 (Homelab Creation). <br/><br/> In this case, I will create the user named 'Prueba' in Customer Service and then move it to the IT Organizational Unit. <br/><br/> <img width="2560" height="1600" alt="Image" src="https://github.com/user-attachments/assets/80b57cc4-3cca-4df8-b1dd-a7e88e2eedef" /> <br/><br/> Then, to move the user, I simply right-click on it and select 'Move...'. Now, I just need to choose which organizational unit (OU) to move it to. In this case, I will move it to IT: <br/><br/> !<img width="2560" height="1600" alt="Image" src="https://github.com/user-attachments/assets/47f5c40f-ba06-4c7e-a031-decd9df77382" /> <br/><br/> Once done, the user has been successfully moved from 'Customer Service' to 'IT'. <br/><br/> <img width="2560" height="1600" alt="Image" src="https://github.com/user-attachments/assets/b2890311-6ceb-4c5a-98f2-311154d35cd5" /> |
 
+-------------------------------------------------------------------------------------------------
+
+## User and Group Creation
+
+### User Accounts and Domain Access
+
+Although we are creating only four virtual machines to simulate end-user workstations, we will create 20 distinct user accounts within Active Directory. This approach avoids the unnecessary complexity and resource consumption of creating 20 separate machines, while still allowing us to manage and test all 20 user accounts effectively. Each user will be able to log into any of the four client machines and access the domain as if they were on a unique machine.
+
+### User List
+
+1. **Juan Martín Franco**
+   - **Username:** juanma
+   - **Occupation:** IT Support
+   - **Email:** juanmafranco@jmfsoft.com
+   - **Phone:** 2325 65 1813
+   - **Department:** IT
+   - **Location:** Argentina
+
+2. **Bob Smith**
+   - **Username:** bsmith
+   - **Occupation:** Sysadmin
+   - **Email:** bob.smith@jmfsoft.com
+   - **Phone:** (555) 123-4562
+   - **Department:** IT
+   - **Location:** San Francisco
+
+3. **Carol Davis**
+   - **Username:** cdavis
+   - **Occupation:** Finance Manager
+   - **Email:** carol.davis@jmfsoft.com
+   - **Phone:** (555) 123-4563
+   - **Department:** Finance
+   - **Location:** Chicago
+
+4. **David Brown**
+   - **Username:** dbrown
+   - **Occupation:** Sales Representative
+   - **Email:** david.brown@jmfsoft.com
+   - **Phone:** (555) 123-4564
+   - **Department:** Sales
+   - **Location:** Miami
+
+5. **Eve Miller**
+   - **Username:** emiller
+   - **Occupation:** HR Manager
+   - **Email:** eve.miller@jmfsoft.com
+   - **Phone:** (555) 123-4565
+   - **Department:** HR
+   - **Location:** Los Angeles
+
+6. **Frank Wilson**
+   - **Username:** fwilson
+   - **Occupation:** IT Support
+   - **Email:** frank.wilson@jmfsoft.com
+   - **Phone:** (555) 123-4566
+   - **Department:** IT
+   - **Location:** New York
+
+7. **Grace Moore**
+   - **Username:** gmoore
+   - **Occupation:** Marketing Specialist
+   - **Email:** grace.moore@jmfsoft.com
+   - **Phone:** (555) 123-4567
+   - **Department:** Marketing
+   - **Location:** Boston
+
+8. **Hank Taylor**
+   - **Username:** htaylor
+   - **Occupation:** Developer
+   - **Email:** hank.taylor@jmfsoft.com
+   - **Phone:** (555) 123-4568
+   - **Department:** Development
+   - **Location:** San Francisco
+
+9. **Ivy Anderson**
+   - **Username:** ianderson
+   - **Occupation:** Product Manager
+   - **Email:** ivy.anderson@jmfsoft.com
+   - **Phone:** (555) 123-4569
+   - **Department:** Product
+   - **Location:** Seattle
+
+10. **Jack Thomas**
+    - **Username:** jthomas
+    - **Occupation:** Sysadmin
+    - **Email:** jack.thomas@jmfsoft.com
+    - **Phone:** (555) 123-4570
+    - **Department:** IT
+    - **Location:** San Francisco
+
+11. **Kathy White**
+    - **Username:** kwhite
+    - **Occupation:** Customer Service Representative
+    - **Email:** kathy.white@jmfsoft.com
+    - **Phone:** (555) 123-4571
+    - **Department:** Customer Service
+    - **Location:** Houston
+
+12. **Leo Harris**
+    - **Username:** lharris
+    - **Occupation:** Network Engineer
+    - **Email:** leo.harris@jmfsoft.com
+    - **Phone:** (555) 123-4572
+    - **Department:** IT
+    - **Location:** New York
+
+13. **Mona Martin**
+    - **Username:** mmartin
+    - **Occupation:** Content Writer
+    - **Email:** mona.martin@jmfsoft.com
+    - **Phone:** (555) 123-4573
+    - **Department:** Marketing
+    - **Location:** Boston
+
+14. **Nate Jackson**
+    - **Username:** njackson
+    - **Occupation:** Database Administrator
+    - **Email:** nate.jackson@jmfsoft.com
+    - **Phone:** (555) 123-4574
+    - **Department:** IT
+    - **Location:** Chicago
+
+15. **Lara Vega**
+    - **Username:** laravega
+    - **Occupation:** Graphic Designer
+    - **Email:** laravega@jmfsoft.com
+    - **Phone:** (555) 123-4575
+    - **Department:** Design
+    - **Location:** Argentina
+
+16. **Paul King**
+    - **Username:** pking
+    - **Occupation:** IT Support
+    - **Email:** paul.king@jmfsoft.com
+    - **Phone:** (555) 123-4576
+    - **Department:** IT
+    - **Location:** New York
+
+17. **Quinn Scott**
+    - **Username:** qscott
+    - **Occupation:** Sales Representative
+    - **Email:** quinn.scott@jmfsoft.com
+    - **Phone:** (555) 123-4577
+    - **Department:** Sales
+    - **Location:** Miami
+  
+18. **Rachel Adams**
+    - **Username:** radams
+    - **Occupation:** Finance Analyst
+    - **Email:** rachel.adams@jmfsoft.com
+    - **Phone:** (555) 123-4578
+    - **Department:** Finance
+    - **Location:** Chicago
+
+19. **Sam Turner**
+    - **Username:** sturner
+    - **Occupation:** DevOps Engineer
+    - **Email:** sam.turner@jmfsoft.com
+    - **Phone:** (555) 123-4579
+    - **Department:** IT
+    - **Location:** Seattle
+
+20. **Tina Phillips**
+    - **Username:** tphillips
+    - **Occupation:** Office Manager
+    - **Email:** tina.phillips@jmfsoft.com
+    - **Phone:** (555) 123-4580
+    - **Department:** Administration
+    - **Location:** Los Angeles
