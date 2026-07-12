@@ -782,4 +782,197 @@ Although we are creating only four virtual machines to simulate end-user worksta
   <img width="1383" height="403" alt="Navigation6" src="https://github.com/user-attachments/assets/ef7713b7-2638-4538-88c0-a217ab85ee9d" />
 </p>
 
----
+<br/>
+
+-------------------------------------------------------------------------------------------------
+
+## Group Policy Management and Implementation
+
+GPOs (Group Policy Objects) are a feature of Windows Server operating systems that allow administrators to centrally manage and configure policies and settings for systems and users in an Active Directory domain network. 
+
+Basically, GPOs are collections of policy settings that can be applied to users and computers in an Active Directory-based network environment. These policies can cover a wide range of settings, from system security to user environment customization.
+
+<img width="519" height="327" alt="Image" src="https://github.com/user-attachments/assets/067de04b-3334-40a2-82be-51d1464ccff6" />
+
+There are some basic concepts of GPOs that need to be understood before starting to configure them:
+
+### GPO (Group Policy Objects) linking
+
+GPOs must be linked to a container in Active Directory to be applied. 
+
+Containers can be sites, domains or Organizational Units (OUs).
+
+<img width="662" height="484" alt="Image" src="https://github.com/user-attachments/assets/383a9555-a473-48d7-ae33-d3a9684ec841" />
+
+### GPO Inheritance / Precedence
+
+GPO inheritance refers to how policies configured in GPOs are applied and inherited through the Active Directory hierarchy. 
+
+The hierarchy follows this order:
+
+1. **Local**: Local policies on the computer.
+2. **Site**: Policies linked to a site in Active Directory.
+3. **Domain**: Policies linked to the domain.
+4. **Organizational Units (OUs)**: Policies linked to specific OUs.
+
+Order of Application:
+
+1. **Local**: Local policies are applied first.
+2. **Site**: Site policies are applied after.
+3. **Domain**: Domain policies are applied next.
+4. **OUs**: OU policies are applied in order from the top-level OU to the most specific OU containing the object (user or equipment).
+
+<img width="729" height="359" alt="Image" src="https://github.com/user-attachments/assets/78a8505e-496a-4721-8a20-2c82ed8fe4c6" />
+
+### Inheritance Modifiers
+
+Mechanisms exist to modify how GPOs are inherited.
+
+1. **Inheritance Blocking**:
+
+    You can block inheritance of GPOs into a specific OU. This means that higher level policies will not be applied to that OU.
+    
+    How to enable: In the GPMC, select the OU, right click and select "Block Inheritance".
+
+2. **Enforced**:
+
+    A GPO can be marked as "Enforced", which means that its policies cannot be blocked by any lower OU.
+    
+    How to enable: In the GPMC, select the GPO, right click and select "Enforced".
+
+3. **Security Filtering**:
+
+    GPOs can be filtered to only apply to specific users or computers by using Security Groups.
+    
+    How to configure: In the GPMC, select the GPO, go to the "Scope" tab and adjust the permissions in the Security Filtering section.
+
+Now that all the basic concepts are understood, it is time to show the steps for the application of such group policies.
+
+### Steps to configure and apply a GPO
+
+   1. **Open the Group Policy Management Console (GPMC)**:
+   
+      Log on to a domain controller or machine with the administrative tools installed (RSAT). <br/>
+      Open the Group Policy Management Console (GPMC). You can do this by searching for "gpmc.msc" in the Start menu or through Administrative Tools.
+
+      ![GPO-4](images/gpo-4.PNG)
+
+
+   2. **Create a New GPO**:
+   
+      In the GPMC, navigate to the container in which you want to create the GPO. This can be a domain, site, or an organizational unit (OU). <br/>
+      Right-click on the container and select "Create a GPO in this domain and link it here...". 
+
+      In this case, I will create a GPO that applies to the entire domain. 
+
+      ![GPO-5](images/gpo-5.png)
+
+   3. **Name the GPO**:
+   
+      Assign a descriptive name to the new GPO. For example, "Password Policy" or "Desktop Wallpaper".  <br/>
+      
+      In this case, I will configure the GPO to apply a secure password policy. 
+
+      ![GPO-6](images/gpo-6.PNG)
+
+   4. **Edit the GPO**:
+      
+      Once created, the new GPO will appear in the list of GPOs linked to the selected domain, site or OU. <br/>
+      
+      Right-click on the GPO and select "Edit" to open the Group Policy Management Editor.
+
+      ![GPO-7](images/gpo-7.png)
+
+      Once this is done, the Group Policy Management Editor will open.
+
+   5. **Configure Desired Policies**:
+   
+      In the Group Policy Management Editor, you can configure policies under two main categories:
+
+        **Computer Settings**:
+
+        - These policies are applied at the computer level. Examples include security settings, software installation, network policies, etc.
+
+        **User Configuration**:
+
+        - These policies are applied at the user level. Examples include desktop settings, folder redirection, software restrictions, etc.
+
+      ![GPO-8](images/gpo-8.PNG)
+
+      In this case, I go to:
+
+        **Computer Configuration > Windows Settings > Security Settings > Account Policies > Password Policy**.
+
+      ![GPO-9](images/gpo-9.PNG)
+
+      Now, I double click on the policy to be modified and a window will open that will allow me to enable/disable this policy and also to modify the values.
+
+      ![GPO-10](images/gpo-10.PNG)
+
+      Finally, I click on "Apply" and the password length policy is set to 8 characters long.
+
+      ![GPO-11](images/gpo-11.PNG)
+
+   6. **Apply the GPO**:
+   
+      The GPO is already bound to the selected domain, site or OU, and the policies will be automatically applied to objects in that scope.
+
+      The GPO will be processed on the next policy update cycle (typically every 90 minutes on computers and at user login). 
+
+   7. **Force Policy Update**:
+
+      To enforce policies immediately, you can force an update on affected computers and users:
+
+        On the Domain Controller:
+
+        - Run **gpupdate /force** at the command prompt to update policies on the domain controller.
+
+        On Client Computers:
+
+        - On each computer, **run gpupdate /force** at the command prompt to apply the new policies immediately. 
+
+      ![GPO-12](images/gpo-12.PNG)
+
+
+### Other examples of group policies that from my point of view would be good to apply
+
+In addition to the password group policy that strengthens security, there are others that I believe are essential to implement in a business environment:
+
+1. **Disable the use of USB devices**:
+
+    **Policy**: Deny read and write access to removable storage devices.
+
+    **Benefit**: Mitigates the risk of data loss and the introduction of malware through unauthorized USB devices.
+
+    **Location**: Computer Configuration > Policies > Administrative Templates > System > Removable Storage Access
+
+    ![GPO-13](images/gpo-13.PNG)
+
+2. **Disable the installation of unauthorized software**:
+
+    **Policy**: Disable installation of devices matching any of these device IDs.
+
+    **Benefit**: Ensures that only approved software is installed, reducing the risk of system vulnerabilities and conflicts.
+
+    **Location**: Computer Configuration > Policies > Administrative Templates > System > Driver Installation
+
+    ![GPO-14](images/gpo-14.PNG)
+
+3. **Disable access to the Control Panel and Settings**:
+
+    **Policy**: Prohibit access to the Control Panel and Settings.
+
+    **Benefit**: Prevents unauthorized changes to system settings and reduces the technical support burden due to inadvertent configuration.
+
+    **Location**: User Configuration > Policies > Administrative Templates > Control Panel
+
+    ![GPO-15](images/gpo-15.PNG)
+
+
+### Example of what happens if I try to perform an action blocked by a group policy
+
+If I try, for example, to access the control panel after it has been locked by group policy and group policies have been updated (either by their natural cycle or by the gpupdate /force command), I get the following message:
+
+![GPO-16](images/gpo-16.PNG)
+
+-------------------------------------------------------------------------------------------------
