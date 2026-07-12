@@ -974,18 +974,17 @@ In addition to the password group policy that strengthens security, there are ot
 ### 1. Locate User in Active Directory
 - Open **Active Directory Users and Computers (ADUC)**.
 - Search for the locked user (e.g., `wag.bewi`).
-- [![Locate User in AD](ADLab1_EmployeeAccountUnlocked.png)](ADLab1_EmployeeAccountUnlocked.png)
+- <img width="1792" height="1120" alt="Image" src="https://github.com/user-attachments/assets/49f69223-deef-430e-babe-66df87cc449c" />
 
 ### 2. Reset Password and Unlock Account
 - Right-click the user → Reset Password.
 - Ensure **"Unlock the user's account"** is checked.
-- [![Password Reset](ADLab1_EmployeeAccountRecovered.png)](ADLab1_EmployeeAccountRecovered.png)
-- [![Reset Options](ADLab1_EmployeeAccountRecovered2.png)](ADLab1_EmployeeAccountRecovered2.png)
+- <img width="1792" height="1120" alt="Image" src="https://github.com/user-attachments/assets/6539ba4c-a770-4a1c-91bd-b6c075c54817" />
 
 ### 3. Confirm Login on Client
 - Log into the client machine using new credentials.
 - Run `whoami` to verify domain and identity.
-- [![Successful Login](ADLab1_EmployeeAccountRecovered3.png)](ADLab1_EmployeeAccountRecovered3.png)
+- <img width="1792" height="1120" alt="Image" src="https://github.com/user-attachments/assets/49a65bec-9a42-4d69-9643-6d2d514c3af4" />
 
 ---
 
@@ -994,7 +993,7 @@ In addition to the password group policy that strengthens security, there are ot
 ### 4. Search for Audit Events
 - Open **Event Viewer** → Windows Logs → Security.
 - Search for the username to track login events.
-- [![Login Event History](ADLab1_EmployeeAccountHistory.png)](ADLab1_EmployeeAccountHistory.png)
-- [![Audit Success](ADLab1_EmployeeAccountHistory2.png)](ADLab1_EmployeeAccountHistory2.png)
+- <img width="1792" height="1120" alt="Image" src="https://github.com/user-attachments/assets/65e5c0a9-d04d-4891-8658-860a6890c172" />
+- <img width="1792" height="1120" alt="Image" src="https://github.com/user-attachments/assets/7938147d-60fb-499a-a7d1-08ac9153a9cf" />
 
 ---
