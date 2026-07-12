@@ -855,7 +855,7 @@ Now that all the basic concepts are understood, it is time to show the steps for
       Log on to a domain controller or machine with the administrative tools installed (RSAT). <br/>
       Open the Group Policy Management Console (GPMC). You can do this by searching for "gpmc.msc" in the Start menu or through Administrative Tools.
 
-      ![GPO-4](images/gpo-4.PNG)
+      <img width="1500" height="1051" alt="Image" src="https://github.com/user-attachments/assets/803cb9b6-6e76-490d-a3a3-e71bb9f9e6a6" />
 
 
    2. **Create a New GPO**:
@@ -865,7 +865,7 @@ Now that all the basic concepts are understood, it is time to show the steps for
 
       In this case, I will create a GPO that applies to the entire domain. 
 
-      ![GPO-5](images/gpo-5.png)
+      <img width="1814" height="1350" alt="Image" src="https://github.com/user-attachments/assets/70997b8c-7bbe-485a-bcd7-5eb2d6ca013b" />
 
    3. **Name the GPO**:
    
@@ -873,7 +873,7 @@ Now that all the basic concepts are understood, it is time to show the steps for
       
       In this case, I will configure the GPO to apply a secure password policy. 
 
-      ![GPO-6](images/gpo-6.PNG)
+      <img width="1817" height="1348" alt="Image" src="https://github.com/user-attachments/assets/414b104d-c633-461c-ad81-a622bfdfe46b" />
 
    4. **Edit the GPO**:
       
@@ -881,7 +881,7 @@ Now that all the basic concepts are understood, it is time to show the steps for
       
       Right-click on the GPO and select "Edit" to open the Group Policy Management Editor.
 
-      ![GPO-7](images/gpo-7.png)
+      <img width="1804" height="1388" alt="Image" src="https://github.com/user-attachments/assets/8abfd2f3-44b1-40d8-9ca4-20207923724e" />
 
       Once this is done, the Group Policy Management Editor will open.
 
@@ -897,21 +897,21 @@ Now that all the basic concepts are understood, it is time to show the steps for
 
         - These policies are applied at the user level. Examples include desktop settings, folder redirection, software restrictions, etc.
 
-      ![GPO-8](images/gpo-8.PNG)
+      <img width="1891" height="1347" alt="Image" src="https://github.com/user-attachments/assets/60046ca6-6796-4a1a-85c8-0ac42d116c82" />
 
       In this case, I go to:
 
         **Computer Configuration > Windows Settings > Security Settings > Account Policies > Password Policy**.
 
-      ![GPO-9](images/gpo-9.PNG)
+      <img width="2049" height="1363" alt="Image" src="https://github.com/user-attachments/assets/d12222df-295e-404f-9ab1-3f81e4aec028" />
 
       Now, I double click on the policy to be modified and a window will open that will allow me to enable/disable this policy and also to modify the values.
 
-      ![GPO-10](images/gpo-10.PNG)
+      <img width="1006" height="1230" alt="Image" src="https://github.com/user-attachments/assets/4b2723a9-b8a6-4926-b113-8132f481e6d7" />
 
       Finally, I click on "Apply" and the password length policy is set to 8 characters long.
 
-      ![GPO-11](images/gpo-11.PNG)
+      <img width="2050" height="1350" alt="Image" src="https://github.com/user-attachments/assets/19f80737-3e9f-4ea6-8bf7-00d21fd49b40" />
 
    6. **Apply the GPO**:
    
@@ -931,7 +931,7 @@ Now that all the basic concepts are understood, it is time to show the steps for
 
         - On each computer, **run gpupdate /force** at the command prompt to apply the new policies immediately. 
 
-      ![GPO-12](images/gpo-12.PNG)
+      <img width="2340" height="1216" alt="Image" src="https://github.com/user-attachments/assets/7f461708-e0ec-42a5-9418-2d773731441c" />
 
 
 ### Other examples of group policies that from my point of view would be good to apply
@@ -946,7 +946,7 @@ In addition to the password group policy that strengthens security, there are ot
 
     **Location**: Computer Configuration > Policies > Administrative Templates > System > Removable Storage Access
 
-    ![GPO-13](images/gpo-13.PNG)
+    <img width="2052" height="1349" alt="Image" src="https://github.com/user-attachments/assets/1d529b00-e48e-4d84-bb7a-b202a713edb9" />
 
 2. **Disable the installation of unauthorized software**:
 
@@ -956,7 +956,7 @@ In addition to the password group policy that strengthens security, there are ot
 
     **Location**: Computer Configuration > Policies > Administrative Templates > System > Driver Installation
 
-    ![GPO-14](images/gpo-14.PNG)
+    <img width="2045" height="1351" alt="Image" src="https://github.com/user-attachments/assets/6a1c939e-91d4-4e8d-a936-2361c22c0222" />
 
 3. **Disable access to the Control Panel and Settings**:
 
@@ -966,13 +966,7 @@ In addition to the password group policy that strengthens security, there are ot
 
     **Location**: User Configuration > Policies > Administrative Templates > Control Panel
 
-    ![GPO-15](images/gpo-15.PNG)
+    <img width="2046" height="1340" alt="Image" src="https://github.com/user-attachments/assets/f26905d5-f547-42f8-864d-417464a24ff5" />
 
-
-### Example of what happens if I try to perform an action blocked by a group policy
-
-If I try, for example, to access the control panel after it has been locked by group policy and group policies have been updated (either by their natural cycle or by the gpupdate /force command), I get the following message:
-
-![GPO-16](images/gpo-16.PNG)
 
 -------------------------------------------------------------------------------------------------
