@@ -970,3 +970,31 @@ In addition to the password group policy that strengthens security, there are ot
 
 
 -------------------------------------------------------------------------------------------------
+## Password Reset
+### 1. Locate User in Active Directory
+- Open **Active Directory Users and Computers (ADUC)**.
+- Search for the locked user (e.g., `wag.bewi`).
+- [![Locate User in AD](ADLab1_EmployeeAccountUnlocked.png)](ADLab1_EmployeeAccountUnlocked.png)
+
+### 2. Reset Password and Unlock Account
+- Right-click the user → Reset Password.
+- Ensure **"Unlock the user's account"** is checked.
+- [![Password Reset](ADLab1_EmployeeAccountRecovered.png)](ADLab1_EmployeeAccountRecovered.png)
+- [![Reset Options](ADLab1_EmployeeAccountRecovered2.png)](ADLab1_EmployeeAccountRecovered2.png)
+
+### 3. Confirm Login on Client
+- Log into the client machine using new credentials.
+- Run `whoami` to verify domain and identity.
+- [![Successful Login](ADLab1_EmployeeAccountRecovered3.png)](ADLab1_EmployeeAccountRecovered3.png)
+
+---
+
+## 🔍 Verify via Event Viewer
+
+### 4. Search for Audit Events
+- Open **Event Viewer** → Windows Logs → Security.
+- Search for the username to track login events.
+- [![Login Event History](ADLab1_EmployeeAccountHistory.png)](ADLab1_EmployeeAccountHistory.png)
+- [![Audit Success](ADLab1_EmployeeAccountHistory2.png)](ADLab1_EmployeeAccountHistory2.png)
+
+---
