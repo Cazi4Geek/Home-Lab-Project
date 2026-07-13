@@ -1082,7 +1082,9 @@ This concept is fundamental in day-to-day IT support, since it is a required ski
 There are many tools on the market that facilitate remote access, such as TeamViewer or AnyDesk.
 Even Windows comes with a tool built into the operating system itself, but for reasons of versatility I will use TeamViewer because it works on many operating systems and it is also my tool of choice, but I could easily use AnyDesk, which also has a very simple interface, less resource consumption and lower licensing costs.
 
-![Teamviewer-Logo](images/teamviewer-logo2.jpg)
+
+
+<img width="256" height="256" alt="Image" src="https://github.com/user-attachments/assets/b481c98c-1df7-4e6a-af5d-521127c4205f" />
 
 In this case, the connection will be made from the SV02 machine to the JMFSOFT-PC01 client machine.
 
@@ -1116,13 +1118,13 @@ To do this, I must perform the following steps:
 
     Below is a comparative table showing the main features between each version:
 
-    ![TeamViewer-4](images/tw4.PNG)
+    <img width="729" height="426" alt="Image" src="https://github.com/user-attachments/assets/4e5b5287-b65a-4e44-b4a9-623a29731313" />
 
     In this case I chose to install the "Full Client" version on the SV02, in its 64-Bits version.
 
 3. Once downloaded and installed, the client is executed, which looks as follows:
 
-    ![TeamViewer-5](images/tw5.PNG)
+    <img width="1192" height="916" alt="Image" src="https://github.com/user-attachments/assets/9831cfa1-8f9e-4d28-862e-6c46b6f40f48" />
 
     To make a connection, it is necessary to use the ID and password.
 
@@ -1130,7 +1132,7 @@ To do this, I must perform the following steps:
 
 4. Now, I download and install the QuickSupport version on the JMFSOFT-PC01 computer (just for demonstration and simplicity, as I could have opted for the Full Client version).
 
-    ![TeamViewer-6](images/tw6.PNG)
+    <img width="2044" height="1594" alt="Image" src="https://github.com/user-attachments/assets/5a4e1638-65cd-4b85-9eed-c88952c76209" />
 
 5. Finally, just share the credentials of the client computer (JMFSOFT-PC01) with the IT Support manager so that he/she can enter them in the TeamViewer client to gain remote access and troubleshoot problems.
    
