@@ -997,3 +997,78 @@ In addition to the password group policy that strengthens security, there are ot
 - <img width="1792" height="1120" alt="Image" src="https://github.com/user-attachments/assets/7938147d-60fb-499a-a7d1-08ac9153a9cf" />
 
 ---
+-------------------------------------------------------------------------------------------------
+
+## Software Deployment
+
+In this section, I will use a software deployment program, **PDQ Deploy**, to simplify and automate the installation and updating of applications across multiple machines in my homelab. The reasons for implementing a software deployment tool like PDQ Deploy are:
+
+- **Efficiency and Time-Saving**: Manually installing or updating software on each client machine can be very time-consuming, especially in a larger environment. PDQ Deploy streamlines this process by allowing for the automated deployment of software packages across all connected devices, saving significant time and effort.
+- **Consistency and Control**: Using PDQ Deploy ensures that all machines receive the same software version and configuration, reducing the risk of discrepancies and compatibility issues. This helps maintain a uniform and controlled IT environment.
+
+- **Centralized Management**: PDQ Deploy provides a centralized interface to manage software installations, making it easier to track deployment status, manage software versions, and perform updates from a single point of control.
+
+- **Scalability**: As my homelab grows, manually handling software installations becomes increasingly impractical. PDQ Deploy scales with the environment, allowing for efficient software management regardless of the number of machines involved.
+
+In this case, I will do it from the secondary server (SV02) to balance the load and not overburden the domain controller (DC01).
+
+This tool can be downloaded from the following website: [PDQ Deploy](https://www.pdq.com/pdq-deploy/)
+
+Now, I proceed to download and install it on the secondary server (SV02).
+
+To do this, I need to create an account, which will give me a free trial of the full program for 14 days, although the basic functionality (software deployment) can still be used after those 14 days:
+
+<img width="856" height="481" alt="Image" src="https://github.com/user-attachments/assets/0c289ee4-6656-480c-9fa9-2ecc379bae60" />
+
+Once registered, I am redirected to the following page where I get the links to download PDQ Deploy & PDQ Inventory, along with their licenses (which last for 14 days).
+
+<img width="997" height="398" alt="Image" src="https://github.com/user-attachments/assets/2aaeaffc-fa6a-462c-9c17-0a1fe7123776" />
+
+After installing (as a server, since SV02 will be in charge of deploying to client machines), the program interface will look like this:
+
+<img width="933" height="530" alt="Image" src="https://github.com/user-attachments/assets/b0b42acb-de77-4906-9bab-f2133c043713" />
+
+Now, to begin the deployment, first, I need to have the installer of the software I want to deploy downloaded and saved in a location.
+
+In this case, for simplicity, I'll choose to install 7zip.
+
+The installer will be located in a folder on the desktop named 'Software to Deploy':
+
+<img width="728" height="370" alt="Image" src="https://github.com/user-attachments/assets/c5923d8f-ffb7-46d9-b60e-152f313e259d" />
+
+Now, I open PDQ Deploy and select 'New Package'. Then, I fill in the fields.
+
+<img width="800" height="432" alt="Image" src="https://github.com/user-attachments/assets/46f92119-889f-4be3-b960-aba0fae942ca" />
+<img width="782" height="234" alt="Image" src="https://github.com/user-attachments/assets/2990c453-b4d4-45de-b626-cd38f98f4d64" />
+
+Afterwards, I go to 'Steps' and then select 'Install':
+
+<img width="772" height="432" alt="Image" src="https://github.com/user-attachments/assets/8a2f6f16-4eaa-456f-945c-2493f18931d1" />
+
+Then, I select the installer, add the parameters for silent installation (in this case, the appropriate one for 7zip is /S) to avoid disturbing any user while they are working, and press save.
+
+<img width="772" height="432" alt="Image" src="https://github.com/user-attachments/assets/8a2f6f16-4eaa-456f-945c-2493f18931d1" />
+
+Once this is done, the package will appear already created. Now, all that's left is to right-click on it and press 'Deploy Once' to begin the deployment.
+
+<img width="727" height="590" alt="Image" src="https://github.com/user-attachments/assets/7af5b61d-f843-4f17-aebf-031fd632f5d5" />
+
+Finally, I must select the users/computers by clicking on 'Choose Targets', and that's it, I can start the deployment:
+
+<img width="885" height="522" alt="Image" src="https://github.com/user-attachments/assets/05296fba-4f31-4c59-a4d8-b037fa235e8c" />
+
+In this case, just for testing purposes, I'll select client machines 1 and 2 (JMFSOFT-PC01 and JMFSOFT-PC02):
+
+<img width="894" height="396" alt="Image" src="https://github.com/user-attachments/assets/ac40e854-5c20-471a-a456-2a4348e33c83" />
+
+After initiating the deployment, I get the following results:
+
+<img width="794" height="434" alt="Image" src="https://github.com/user-attachments/assets/5e9f6d46-ee23-46f6-a372-a5801fe1dd7f" />
+
+Now, I verify that 7zip was installed correctly on the client machines:
+
+<img width="318" height="231" alt="Image" src="https://github.com/user-attachments/assets/408757cc-3997-488a-bf4a-a714cfc29176" />
+
+And, with this, I can successfully conclude the deployment.
+
+-------------------------------------------------------------------------------------------------
