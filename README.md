@@ -1137,3 +1137,197 @@ To do this, I must perform the following steps:
 5. Finally, just share the credentials of the client computer (JMFSOFT-PC01) with the IT Support manager so that he/she can enter them in the TeamViewer client to gain remote access and troubleshoot problems.
    
 -------------------------------------------------------------------------------------------------
+## VPN Configuration
+
+In addition to using remote access to troubleshoot problems, a good practice is to use remote access via VPN.
+
+A **Virtual Private Network (VPN)** is a technology that creates a secure, encrypted network connection over a public network, such as the Internet. It allows users to send and receive data securely over shared or public networks as if their devices were connected directly to a private network.
+
+### Why is it considered a good practice?
+
+- **Data Security:**
+
+  - **Encryption:** VPNs use encryption protocols to protect the data transmitted between the user and the VPN server. This makes the information unreadable to anyone intercepting the connection.
+  
+  - **Authentication:** VPNs may require authentication, which ensures that only authorized users can access the network.
+  
+- **Privacy:**
+  
+  - **IP Hiding:** The VPN hides the user's IP address, which helps maintain online privacy by making user activity less traceable.
+  
+  - **Identity Protection:** By hiding the user's location and identity, VPNs protect against tracking and data collection by third parties.
+
+- **Secure Remote Access:**
+  
+  - **Remote Work:** VPNs allow employees to securely access the corporate network from remote locations, which is crucial for teleworking and workforce mobility.
+  
+  - **Corporate Resources:** Users can access internal corporate resources, such as files, applications and databases, as if they were physically in the office.
+
+- **Censorship and Geographical Restrictions Avoidance:**
+
+  - **Accessing Blocked Content:** VPNs allow users to access websites and services that may be blocked or restricted in their geographic location.
+  
+  - **Censorship Avoidance:** They can be used to circumvent censorship in regions where Internet access is controlled or restricted.
+
+- **Information Integrity:**
+
+  - **Protection Against Tampering:** VPNs' encryption and security protocols protect data from alteration and tampering while in transit.
+
+
+### Conclusion
+
+Implementing VPNs is a best practice for its ability to provide a secure and private connection over public networks, protect sensitive information and allow secure remote access to network resources. This not only improves overall network security, but also ensures the integrity and privacy of transmitted data.
+
+### Steps to set up a VPN
+
+1. First, I must choose on which server I want to install the role.
+
+    In this case I will choose to install the Remote Access role on the SV02 server.
+    This helps distribute the workload and improves security by not directly exposing the domain controller to external connections.
+
+    To start, I open the Server Manager:
+
+    <img width="1536" height="912" alt="Image" src="https://github.com/user-attachments/assets/341a162a-1518-4d22-a8f8-0ae0d06192f4" />
+ 
+2. Then, to add the role, I go to “Manage” and then “Add roles and features”:
+
+    <img width="1134" height="652" alt="Image" src="https://github.com/user-attachments/assets/5cb24490-b060-4688-b1a4-197250b0b3b3" />
+
+3. Now, I select the “Remote Access” role and install it:
+   
+   <img width="942" height="674" alt="Image" src="https://github.com/user-attachments/assets/9accfa4d-c9da-4724-8837-d3b7ae338d2e" />
+
+4. Then, I select the “DirectAccess and VPN (RAS)” option:
+
+    <img width="940" height="668" alt="Image" src="https://github.com/user-attachments/assets/84ae237d-34d2-4947-91f0-7e5c22a4bd67" />
+
+    * **DirectAccess** is a remote access technology introduced in Windows Server 2008 R2. It allows remote users to access internal network resources without the need to manually initiate a VPN connection. DirectAccess automatically establishes a secure, persistent connection between the user's device and the corporate network, providing an experience similar to being in the office.
+     
+    * **VPN** is a technology that creates a secure, encrypted connection over a less secure network, such as the Internet. VPN allows remote users to access internal network resources as if they were directly connected to the network. 
+
+5. Finally, I review the selected items and confirm that everything is correct to start with the installation of the Remote Access role, so I press “Install”:
+
+    <img width="938" height="670" alt="Image" src="https://github.com/user-attachments/assets/e4d0bf32-c22d-417e-b740-1ee9bf118001" />
+
+6. Once the installation is complete, a message will be displayed indicating that the installation was successful, but that configuration is required:
+
+    <img width="938" height="670" alt="Image" src="https://github.com/user-attachments/assets/332c2ba1-e2fc-4ebe-b149-24bbb4cd3e4e" />
+
+7. Now, it is time to configure the Virtual Private Network (VPN), which will allow remote access to employees in a distant geographical location.
+
+    To do this, I must open the “Introduction Wizard”, which is displayed when I finish installing the “Remote Access” role:
+
+    <img width="408" height="196" alt="Image" src="https://github.com/user-attachments/assets/cdade961-5dee-4b79-af8e-8bbabaf058a6" />
+
+8. Once the wizard is opened, a window containing 3 options will be displayed:
+
+    <img width="778" height="638" alt="Image" src="https://github.com/user-attachments/assets/1e398aae-e669-43c4-8792-e70c91ea541b" />
+
+    * **Implement DirectAccess and VPN (Recommended)**: Implementing both VPN and DirectAccess offers flexibility, allowing users to choose between automatic (DirectAccess) or manual (VPN) connections based on their needs. This option provides compatibility across various devices and operating systems that do not support DirectAccess, such as macOS and Linux. DirectAccess ensures a seamless and continuous connection to the corporate network, ideal for users who require uninterrupted access. It also enhances security by utilizing multiple authentication and encryption methods. However, managing both technologies can be complex, requiring more time and resources, and DirectAccess requires IPv6, which might necessitate additional network configurations.
+
+    * **Implement DirectAccess only**: Implementing DirectAccess Only provides a transparent connection experience, as users do not need to manually initiate the connection. It allows continuous remote management of devices, even when users are not logged in, and uses IPsec for secure communication with the option for multi-factor authentication. The downside is its limited compatibility, as it only works with Windows devices that support DirectAccess, and it requires IPv6 and additional network configurations.
+  
+    * **Implement VPN only**: Implementing VPN Only offers broad compatibility with various devices and operating systems, including Windows, macOS, Linux, Android, and iOS. It is generally simpler and more straightforward to configure compared to DirectAccess and allows for flexibility in choosing VPN protocols based on security and compatibility needs. However, users must manually initiate the VPN connection each time they need access to the corporate network, and administrators typically cannot manage remote devices when they are not connected to the VPN.
+ 
+    In this case, I will select the option “**Implement VPN only**”.
+
+9. Once this option is selected, a new window called “Routing and Remote Access” will open.
+    
+    ![VPN-9](images/vpn9.PNG)
+
+    In this case, you can see by the icon with the red arrow that the service is not currently configured and enabled. 
+
+    To configure it, we right click on it and select the option “Configure and enable Remote Access”:
+
+    ![VPN-10](images/vpn10.png)
+
+10. Once the wizard is opened, a configuration menu opens where I have to choose a combination of services to provide:
+
+    - **Remote Access:** Configures the server to function as a Remote Access Service (RAS), allowing users to connect to the corporate network via dial-up lines or private networks.
+  
+    - **Network Address Translation (NAT):** Configures the server to act as a NAT device, enabling devices on a private network to access the Internet using a single public IP address. NAT hides internal IP addresses, enhancing security and conserving public IP addresses.
+  
+    - **Virtual Private Network (VPN) and NAT access:** Configures the server to provide both VPN and NAT services. This allows remote users to securely connect to the corporate network over the Internet (VPN) and also provides NAT services to manage network traffic between internal and external networks.
+  
+    - **Secure connection between two private networks:** Sets up a secure connection between two distinct networks, allowing them to communicate securely over the Internet. This is ideal for connecting different branches of a company, creating a private virtual network between them.
+  
+    - **Custom configuration:** Allows for detailed configuration of remote access services. You can manually select the specific services you want to configure, such as VPN, NAT, routing, dial-up remote access, etc. This option offers the most flexibility to tailor the setup to specific needs.
+
+    In this case, I select the first option (Remote Access), since I am only interested in providing the VPN service:
+
+    ![VPN-11](images/vpn11.PNG)
+
+    Then, I select the “VPN” option:
+
+    ![VPN-12](images/vpn12.PNG)
+
+    Now, I must select the interface that connects the server to the Internet. 
+
+    In this case, it is the “Ethernet” interface, whose IP address is 192.168.1.6:
+
+    ![VPN-13](images/vpn13.PNG)
+
+    Now, I must select whether I want the IP addresses of the computers connecting to the VPN to be assigned automatically (via DHCP) or whether I want an IP address to be chosen from a defined range.
+
+    In this case, I will select the option “From a specified address range”:
+
+    ![VPN-14](images/vpn14.PNG)
+
+    Next, I create the range of addresses that I will choose to be assigned to those computers that connect to VPN.
+
+    As this is an example case, I will select an agreed range that will only cover 8 IP addresses, from 192.168.1.88 to 192.168.1.95:
+
+    ![VPN-14-2](images/vpn14-2.PNG)
+
+    Finally, I check that everything is correct and press “Finish”:
+
+    ![VPN-16](images/vpn16.PNG)
+
+    Once this is done, the VPN server will be running: 
+
+    ![VPN-17](images/vpn17.PNG)
+
+11. Now, to connect to a VPN from a client computer (in this case, JMFSOFT-PC04), I go to the search bar and type VPN.
+
+    Then, I select the “VPN Configuration” option:
+
+    ![VPN-CLI1](images/vpncli1.PNG)
+
+    Then, I select the “Add a VPN connection” option:
+
+    ![VPN-CLI2](images/vpncli2.PNG)
+
+    Then, I fill in the following fields:
+
+    ![VPN-CLI3](images/vpncli3.PNG)
+    ![VPN-CLI4](images/vpncli4.PNG)
+
+    Once the fields have been filled in, the connection will be saved.
+
+    All you have to do is click on connect:
+
+    ![VPN-CLI5](images/vpncli5.PNG)
+    ![VPN-CLI6](images/vpncli6.PNG)
+
+    As shown in the image, the connection was successful.
+
+
+12. Now, I can verify this as follows:
+
+    From the Client side:
+
+    * I go to CMD or Powershell and type ipconfig /all, and the connection should appear:
+
+      ![VPN-CLI7](images/vpncli7.PNG)
+
+    From the VPN server side:
+
+    * I go to the “Routing and Remote Access” console, and then to the “Remote Access Clients” section.
+
+      This section should list all the client computers connected to the VPN:
+
+      ![VPN-CLI8](images/vpncli8.PNG)
+
+This concludes the VPN server configuration.
+  
+-------------------------------------------------------------------------------------------------
