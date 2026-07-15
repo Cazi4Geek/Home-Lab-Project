@@ -1329,3 +1329,411 @@ Implementing VPNs is a best practice for its ability to provide a secure and pri
       This concludes the VPN server configuration.
   
 -------------------------------------------------------------------------------------------------
+## Monitoring and Visualization
+
+In this section, I will install and integrate two programs, **Zabbix and Grafana**, to monitor client machines. This setup will enable real-time tracking and management of system performance and network activity. The primary reasons for including Zabbix, a robust monitoring tool, and Grafana, a powerful real-time data visualization program, in my homelab are:
+
+- **Proactive Issue Detection**: Zabbix will help in identifying and addressing potential issues, such as hardware failures, software crashes, or network disruptions, before they impact the system's functionality. Grafana will provide a clear, visual representation of these issues, making them easier to understand and act upon.
+
+- **Performance Optimization**: Continuous monitoring with Zabbix and real-time data analysis through Grafana will allow for fine-tuning system performance and ensuring efficient resource utilization.
+
+- **Security Enhancement**: By using Zabbix to keep a close watch on system activities and Grafana to visualize security metrics, I can quickly detect any unauthorized access or unusual behavior, thereby strengthening the security of the environment.
+
+- **Learning and Experimentation**: Implementing Zabbix and Grafana will provide hands-on experience in setting up, configuring, and utilizing monitoring and data visualization technologies, which are critical skills for IT management and cybersecurity.
+
+<img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/f06a5551-25f9-4ef2-ac1c-e175788213ca" /><img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/a691c53d-62fb-436f-aefc-393b782986f1" />
+
+To monitor the machines, I will use the Linux operating system, specifically the Debian 12.5 distro, on which I will install Zabbix and Grafana, tools for monitoring and data visualization respectively.
+
+To start creating the Linux virtual machine, I first need to download the Debian distro, which can be downloaded from the official website: [debian.org](https://www.debian.org/index.es.html).
+
+Once downloaded, I proceed to start creating the virtual machine:
+
+First, I specify the name of the machine, which will be **MON01** as it is an abbreviation for 'Monitoring', clearly indicating that the machine is dedicated to monitoring.
+As you can see in the image, the virtual machine was created correctly. Now, I proceed to start it to begin with the installation of the operating system.
+
+<img width="360" height="324" alt="Image" src="https://github.com/user-attachments/assets/d6c1c304-b606-4c8f-b194-99f092266652" />
+
+Once the virtual machine is started, the Debian 12.5 operating system will begin to be installed.
+First, I must indicate what action I want to perform. 
+In this case, I will perform a 'Graphical Install'.
+
+<img width="640" height="478" alt="Image" src="https://github.com/user-attachments/assets/66f90e7b-c7cb-4816-94ee-6c613cf35cf0" />
+
+Now, I must select the language.
+In this case, I select "English", but I could have selected my native language (Spanish).
+
+<img width="795" height="599" alt="Image" src="https://github.com/user-attachments/assets/3eecc7e1-2bea-4925-a2b1-3cae2dd702e6" />
+
+The installer will then load the installation components from the downloaded .ISO file. <br/> After that, it will try to obtain an IP address via DHCP (Dynamic Host Configuration Protocol).
+
+Once all this happens, I must define the hostname. 
+In this case, I will choose to put "deb-mon01", which is a mix between the operating system (debian) and the main function of the machine (monitoring).
+
+<img width="796" height="597" alt="Image" src="https://github.com/user-attachments/assets/76690671-4c10-460d-bd73-7289fdab67a5" />
+
+Now, I must define the password of the root user, which is the most important user of the system. For this reason, this password cannot be forgotten.
+
+<img width="796" height="595" alt="Image" src="https://github.com/user-attachments/assets/4487c22a-23a4-44b6-9cb7-a4ee4693195e" />
+
+Now, I select a user name which will be created to perform the tasks that do not require elevated privileges. This is similar to creating a local user in Windows in addition to the Administrator user.
+In this case, I will choose to create the user "juanma".
+
+<img width="795" height="593" alt="Image" src="https://github.com/user-attachments/assets/81042a48-1360-4639-a77c-b5196233a56a" />
+
+Now, it is time to partition the disks.
+In this case, I chose a guided partition as I find no justification for partitioning manually on a homelab.
+In a real environment, this should be configured in a more detailed way, creating a partition for the operating system and one for the swap.
+
+<img width="798" height="592" alt="Image" src="https://github.com/user-attachments/assets/73d4a379-9dce-4f40-9302-0693216a5f7d" />
+
+Finally, a summary of the automatic partitioning is shown.
+Although the "swap" partition is created, which serves as an extension of the virtual memory when the physical RAM (Random Access Memory) is fully utilized, the amount allocated may not be the recommended amount, but for a test environment such as this homelab this is more than enough.
+
+<img width="798" height="593" alt="Image" src="https://github.com/user-attachments/assets/82b95b43-af6d-4083-bffe-f19c14a5c00b" />
+
+After unpacking and installing the base files, the system will query if a proxy is being used (in this case no) and which is the country from where I am using the operating system to recommend mirrors from where the desired packages will be installed.
+
+Next, the system starts configuring **'apt' (Advanced Package Tool)**, which is a command line tool used to manage software packages. Its main function is to facilitate the installation, update and removal of applications and utilities in the operating system.
+
+<img width="794" height="596" alt="Image" src="https://github.com/user-attachments/assets/5fb93d8e-c873-4b03-bd05-0448426c7f66" />
+
+Then, it is asked about what software you want to install.
+In this case, several desktop environments are shown (I will choose to use GNOME), the web server and the SSH Server (which serves to allow remote connections to the machine).
+In this case, I won't install either (web or ssh).
+
+<img width="796" height="595" alt="Image" src="https://github.com/user-attachments/assets/031ae30b-08d4-4fd4-8364-efe91330bfee" />
+
+Finally, GRUB (the operating system boot loader) is installed on the primary partition and then the installation is completed.
+
+<img width="791" height="593" alt="Image" src="https://github.com/user-attachments/assets/95b59ab7-a3b4-491a-933a-0343990152a3" />
+
+Once the computer has restarted, I find the following screen in which I can log in to the system with the user (juanma) and the previously defined password:
+
+<img width="1018" height="761" alt="Image" src="https://github.com/user-attachments/assets/84120722-b920-445e-961b-cbda4ed7d701" />
+
+Once this is done (logged in), I am already using the Debian operating system.
+
+<img width="1021" height="770" alt="Image" src="https://github.com/user-attachments/assets/325930ec-3996-41a7-ad79-4547c83a2bd5" />
+
+Following this, I must install Zabbix and Grafana to begin monitoring the company's equipment.
+
+### Zabbix Installation
+
+To begin the installation of Zabbix, I go to their official website --> [https://www.zabbix.com/download](https://www.zabbix.com/download) and select the following options:
+
+<img width="1234" height="588" alt="Image" src="https://github.com/user-attachments/assets/f091f443-baac-46b2-ac05-d6ed7550b210" />
+
+**ZABBIX VERSION**: 6.4, the latest stable version <br/>
+**OS DISTRIBUTION**: Debian <br/>
+**OS VERSION**: 12 (Bookworm) <br/>
+**ZABBIX COMPONENT**: Server, Frontend, Agent (since I want to install the Zabbix server on this machine to monitor other client devices) <br/>
+**DATABASE**: MySQL (in this case, I choose MySQL because its configuration and management are simpler. I don't need to handle a large volume of data writes and I prioritize performance for read queries. However, in an enterprise environment, PostgreSQL might be more useful if complex transaction processing is needed) <br/>
+**WEB SERVER**: Apache (I choose Apache because it has native compatibility with Zabbix, is easier to configure, and I don't require handling many concurrent connections. This doesn’t justify installing Nginx, which excels at efficient management of concurrent connections and scalability) <br/>
+
+Once all these options are selected, I need to follow the installation manual on the website, which is tailored to the previously chosen options. <br/>
+To run the following commands, you need to open a terminal, which allows you to interact with the operating system using text-based commands.
+
+<img width="1185" height="249" alt="Image" src="https://github.com/user-attachments/assets/4d90399b-a8dc-4d15-a789-fcd9d64093c2" />
+
+The first command (**wget**) downloads the Zabbix 6.4 .deb package, which is then installed with the next command (**dpkg -i**). <br/>
+Finally, **apt update** is run, which updates the list of available packages and their versions from the configured repositories. This ensures that the system has the most up-to-date information about the packages available for installation or upgrade.
+
+![Zabbix 3](images/zbx3.PNG)
+
+![Zabbix 4](images/zbx4.PNG)
+
+![Zabbix 5](images/zbx5.PNG)
+
+Once these commands are executed, we proceed to install the Zabbix server, frontend, and agent:
+
+![Zabbix 6](images/zbx6.PNG)
+
+After executing the command, I will be prompted to confirm the installation of the listed packages. To confirm, type 'y' (for yes) and press enter. Alternatively, I could skip this prompt by adding the -y parameter to the original command.
+
+![Zabbix 7](images/zbx7.PNG)
+
+Once this is done, I proceed to create the initial database in MySQL:
+
+![Zabbix 8](images/zbx8.PNG)
+
+In this case, Debian 12.5 uses MariaDB (a MySQL fork compatible with most applications that use MySQL) instead of MySQL.
+Because of this, I will use the equivalent commands for the MariaDB database.
+
+![Zabbix 9](images/zbx9.PNG)
+
+The commands executed in the image perform the following actions:
+
+- **sudo mariadb -u root -p**: This command initiates an interactive session with the MariaDB database server as the root user. The -p parameter prompts for the password of the root user to authenticate.
+
+- **create database zabbix character set utf8mb4 collate utf8mb4_bin;**: Creates a new database named zabbix on the MariaDB server. utf8mb4 specifies the UTF-8 character set for full Unicode support, capable of storing a wide range of characters. utf8mb4_bin specifies the binary collation setting, which is useful for binary string comparison without regard to specific regional settings.
+
+- **create user 'zabbix'@'localhost' identified by 'Test.123';** Creates a new user in the MariaDB database named zabbix, restricted to connections from the same server (localhost). The password for this user is set to 'Test.123'.
+
+- **grant all privileges on zabbix.\* to 'zabbix'@'localhost';**: Grants all privileges on the zabbix database to the zabbix user when connecting from localhost. This allows the zabbix user to perform all operations (create, modify, delete, select, etc.) on all tables and objects within the zabbix database.
+  
+- **set global log_bin_trust_function_creators = 1;**: Enables the safe execution of user-defined functions (UDF) in a binary log replication environment. This is necessary to allow Zabbix, which often uses user-defined functions, to function correctly in database replication environments.
+
+![Zabbix 10](images/zbx10.PNG)
+
+![Zabbix 11](images/zbx11.PNG)
+
+The command "**zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | sudo mariadb -u zabbix -p zabbix --default-character-set=utf8mb4**" is used to import a gzip-compressed database file into MariaDB, specifically for the Zabbix monitoring system.
+
+In this command, the file "/usr/share/zabbix-sql-scripts/mysql/server.sql.gz" is decompressed using zcat and then imported into MariaDB. The command is prefixed with "sudo" to execute it with superuser privileges, ensuring sufficient permissions to perform the import. "-u zabbix" specifies that the user "zabbix" will be used to connect to MariaDB, and "-p zabbix" indicates that the password for the user "zabbix" will be used. The option "--default-character-set=utf8mb4" ensures that UTF-8 character set encoding is used.
+
+![Zabbix 12](images/zbx12.PNG)
+
+![Zabbix 13](images/zbx13.PNG)
+
+Executing the command "**SET GLOBAL log_bin_trust_function_creators = 0;**" sets the parameter to 0. This parameter controls whether non-superuser accounts can create user-defined functions when binary replication (log_bin) is enabled. Setting it to 0 restricts this capability, ensuring tighter control over the functions created in the database.
+
+After performing these steps, it is necessary to configure the database for the Zabbix server:
+
+![Zabbix 14](images/zbx14.PNG)
+
+![Zabbix 15](images/zbx15.PNG)
+
+Now that everything is configured, I need to restart the 'zabbix-server', 'zabbix-agent', and 'apache2' services using **systemctl restart**. Additionally, I will enable them to start automatically at system boot using **systemctl enable**.
+
+![Zabbix 16](images/zbx16.PNG)
+
+![Zabbix 17](images/zbx17.PNG)
+
+Once the services are restarted and enabled, I proceed to open the Zabbix web interface (Zabbix UI) by accessing the link http://[host]/zabbix.
+In this case, the hostname is: deb-mon01, but if I don't know it, I can run the command 'hostname'.
+
+![Zabbix 18](images/zbx18.PNG)
+
+![Zabbix 19](images/zbx19.PNG)
+
+![Zabbix 20](images/zbx20.PNG)
+
+Once the language is selected, I click 'Next Step' and verify that all prerequisites are met (in this case, as shown in the image, all are satisfactorily met):
+
+![Zabbix 21](images/zbx21.PNG)
+
+Now, I configure the database connection.
+In this case, I just need to verify that the username is correct (zabbix), and I must fill in the password with the one used previously (Test.123):
+
+![Zabbix 22](images/zbx22.PNG)
+
+Now, I need to fill in the Zabbix web server name, set the time zone, and choose the web interface theme. In this case, I opted for the name "Zabbix Server - Buenos Aires Office" to identify the Zabbix server. It's a clear and descriptive name indicating the purpose and location of the server.
+
+The time zone is (UTC-03:00) America/Argentina/Buenos Aires, and the chosen theme is 'Blue'.
+
+![Zabbix 23](images/zbx23.PNG)
+
+Finally, a summary of the selected configurations is displayed. I verify that everything is correct and then click 'Next Step'.
+
+![Zabbix 24](images/zbx24.PNG)
+
+Then, a message appears indicating that the Zabbix server has been successfully configured and installed.
+
+![Zabbix 25](images/zbx25.PNG)
+
+Once 'Finish' is pressed, I am redirected to a login where I must enter the following credentials:
+
+**Username**: Admin <br/>
+**Password**: zabbix
+
+![Zabbix 26](images/zbx26.PNG)
+
+Once this is done, I conclude with the configuration and installation of the Zabbix server. Now, the only thing left is to install the client on the machines I want to monitor or discover them automatically on the network.
+
+![Zabbix 27](images/zbx27.PNG)
+
+Once installed on Linux, I proceed to download the agent on Windows. <br/>
+In this case, I will install and configure the agent manually on each machine, but I could do it using PDQ Deploy from SV02.
+
+![Zabbix 28](images/zbx28.PNG)
+
+Once downloaded and started, I must indicate the IP address of the Zabbix server (i.e. the Debian 12.5 machine where I installed the Zabbix server).
+In this case, I can verify this information using the ip address show command (or ip a s for short).
+
+![Zabbix 29](images/zbx29.PNG)
+
+![Zabbix 30](images/zbx30.PNG)
+
+Then, I press 'Next' and finish the agent installation. After that, I proceed to repeat this process on the other machines (DC01, JMFSOFT-PC01, JMFSOFT-PC02, JMFSOFT-PC03, JMFSOFT-PC04).
+
+![Zabbix 31](images/zbx31.PNG)
+
+Before installing it on the other machines, I can verify that it has been installed and is working correctly by checking in the Windows Services:
+
+![Zabbix 32](images/zbx32.PNG)
+
+Then, I proceed to add the host to which I have just installed the agent with its corresponding data (Name: SV02, IP: 192.168.1.6, etc.).
+
+![Zabbix 33](images/zbx33.PNG)
+
+![Zabbix 34](images/zbx34.PNG)
+
+From now on, I can collect information from the SV02 server, and visualize it from MON01 (Linux Debian 12.5):
+
+![Zabbix 35](images/zbx35.PNG)
+
+### Grafana Installation
+
+To begin the installation of Grafana, I go to their official website --> [https://grafana.com/](https://grafana.com/).
+
+In this case, I will choose to install from the apt package manager, for the sake of simplicity and complete integration with the operating system. Besides, it has the advantage of automatic updates when I run the "apt update" command.
+
+Another option is to install by downloading and installing a ".deb" file, which has advantages such as access to the latest version and full control of the installation.
+
+![Grafana 1](images/grf1.PNG)
+
+To start with the installation, I perform the following steps:
+
+![Grafana 2](images/grf2.PNG)
+
+![Grafana 3](images/grf3.PNG)
+
+The packages installed in the above image are required as they provide the following:
+
+  - **apt-transport-https**: Enables support for HTTPS connections in apt.
+  - **software-properties-common**: Provides additional tools to manage software repositories.
+  - **wget**: Used to download files from the command line.
+
+![Grafana 4](images/grf4.PNG)
+
+![Grafana 5](images/grf5.PNG)
+
+These commands are used to add the Grafana GPG (Gnu Privacy Guard) key to the system, allowing to verify the authenticity of the packages downloaded from the Grafana repository. 
+
+  - **sudo mkdir -p /etc/apt/keyrings/**: mkdir -p creates the specified directory (/etc/apt/keyrings/). The -p option ensures that if the directory already exists, an error is not generated.
+  
+  - **wget -q -O - https://apt.grafana.com/gpg.key | gpg --dearmor | sudo tee /etc/apt/keyrings/grafana.gpg > /dev/null**: Downloads the Grafana GPG key and saves it in /etc/apt/keyrings/grafana.gpg
+
+The last command (**ls -l /etc/apt/keyrings/**) was executed only to verify that the key was downloaded correctly.
+
+![Grafana 6](images/grf6.PNG)
+
+![Grafana 7](images/grf7.PNG)
+
+The command
+  - **echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list** 
+
+is used to add a Grafana repository line to the apt source configuration file on Debian-based systems (such as Ubuntu).
+
+![Grafana 8](images/grf8.PNG)
+
+![Grafana 9](images/grf9.PNG)
+
+Now, I ran the command   
+  
+  - **sudo apt-get update**  
+
+to update the list of available packages.
+
+When you run "sudo apt-get update", the system contacts each of the repositories listed in /etc/apt/sources.list and in the files inside the /etc/apt/sources.list.d/ directory (such as grafana.list that we configured earlier).
+
+![Grafana 10](images/grf10.PNG)
+
+![Grafana 11](images/grf11.PNG)
+
+The 
+
+  - **sudo apt-get install grafana** 
+  
+command is used to install Grafana on a Debian-based system, such as Ubuntu.
+
+![Grafana 12](images/grf12.PNG)
+
+Finally, I run the command
+
+  - **apt list --installed | grep grafana**
+
+to verify that grafana was installed correctly.
+
+![Grafana 13](images/grf13.PNG)
+
+Finally I run the commands  
+
+  - **systemctl start grafana-server**
+  - **systemctl enable grafana-server**
+
+The systemctl start grafana-server command is used to manually start the Grafana service on the system. 
+
+The systemctl enable grafana-server command is used to configure Grafana to start automatically at system startup.
+
+### Zabbix and Grafana Integration
+
+To access the Grafana web portal, I go to the address (localhost:3000) or simply use my hostname (deb-mon01:3000) or my ip address (192.168.0.7:3000):
+
+![Grafana 14](images/grf14.PNG)
+
+By default, I can login with the following credentials:
+
+    - user: admin
+    - password: admin
+
+![Grafana 15](images/grf15.PNG)
+
+Now, I must integrate Zabbix with Grafana. 
+
+- **Zabbix** is a network and system monitoring platform that allows you to monitor and track the performance of IT infrastructures, networks, services and applications.
+
+- **Grafana** is an open source data visualization and analysis platform designed to work with time series and metrics data.
+
+Grafana can be integrated with Zabbix as a data source, allowing users to import data from Zabbix and create custom visualization dashboards that combine data from multiple sources.
+
+To integrate Zabbix with Grafana, I perform the following steps:
+
+1. First, I verify that all the devices are recognized in Zabbix. 
+  To verify this, I go to deb-mon01/zabbix/, then inside the web interface I go to Data Collection and then Hosts.
+  In this case, I have 2 virtual machines turned off (JMFSOFT-PC03 and JMFSOFT-PC04) for a lack of resources, but in a real environment they would all be on. <br/><br/>
+  ![Grafana 16](images/grf16.PNG)
+
+2. Then, once this is confirmed, I must log in to the Grafana web interface.
+  To do this, I go to deb-mon01:3000: <br/><br/>
+  ![Grafana 17](images/grf17.PNG)
+
+3. Once this is done, in the left panel, I go to Administration --> Plugins: <br/><br/>
+   ![Grafana 18](images/grf18.PNG) <br/><br/>
+   Inside Plugins, I look for the "Zabbix" plugin and install it: <br/><br/>
+   ![Grafana 19](images/grf19.PNG) <br/><br/>
+
+4. Now, once the plugin is installed and enabled, I must restart the grafana-server service, with the following command:
+    - **sudo systemctl restart grafana-server** <br/><br/> 
+    ![Grafana20](images/grf20.PNG) <br/><br/> 
+
+5. Now, I must link the Grafana service to Zabbix. <br/>
+  Within the web interface, from the Connection console, I go to Data Sources and then select "Add Data Source".<br/> <br/> 
+  Once there, I choose "Zabbix" and complete the following fields: <br/>
+
+     - **Name**: Zabbix Server
+     - **URL**: http://deb-mon01/zabbix/api_jsonrpc.php 
+     - **Username**: Admin
+     - **Password**: zabbix
+
+    Although it is recommended to create a dedicated account especially for this instead of using the "Admin" account, for the sake of simplicity, I have decided to use the Admin account.
+
+    ![Grafana21](images/grf21.PNG) <br/><br/> 
+    ![Grafana22](images/grf22.PNG) <br/>
+
+    Once this is saved, a green banner should be displayed indicating that you have successfully connected to the data source. <br/> If not, a red banner is displayed indicating an error.
+    
+    ![Grafana23](images/grf23.PNG) <br/>
+
+6. Once the connection with the data source is made, I can proceed with the creation of Dashboards.
+   
+   To do this, fill in the "**Host**" field with the host name of the device to be monitored.
+    For example: DC01.
+    Then, I fill in the "**Item**" field with the item I want to monitor. For example, if I want to see the CPU utilization, I fill in "Windows: CPU Utilization":
+
+    ![Grafana24](images/grf24.PNG) <br/>
+
+    In this case, the usefulness of the graph cannot be fully appreciated since the server was inactive and therefore the CPU utilization is practically null, but in a real environment its use could be analyzed over time.
+
+    I decided to use a "**Time Series**" type graph because it is the most appropriate for the following reason: 
+    CPU utilization varies continuously as processes run on the server. A time series graph captures these changes in real time and allows you to see how the CPU load fluctuates over the course of the day, week, month or any other desired time period. In addition, patterns and trends can be analyzed.
+
+    For demonstration purposes, I also decided to add the "**Disk Write Rate**" to the dashboard.
+  
+7. Finally, I created another panel and added it to the dashboard.
+  This completes the installation of Zabbix, the installation of Grafana, and the subsequent integration of Zabbix with Grafana for visualization.
+
+    ![Grafana25](images/grf25.PNG) <br/>
+
+-------------------------------------------------------------------------------------------------
