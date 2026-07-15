@@ -1233,13 +1233,13 @@ Implementing VPNs is a best practice for its ability to provide a secure and pri
 
 9. Once this option is selected, a new window called “Routing and Remote Access” will open.
     
-    ![VPN-9](images/vpn9.PNG)
+    <img width="744" height="530" alt="Image" src="https://github.com/user-attachments/assets/b72a1ed9-b0f3-438d-aa37-89139064c442" />
 
     In this case, you can see by the icon with the red arrow that the service is not currently configured and enabled. 
 
     To configure it, we right click on it and select the option “Configure and enable Remote Access”:
 
-    ![VPN-10](images/vpn10.png)
+    <img width="746" height="528" alt="Image" src="https://github.com/user-attachments/assets/ba113cf5-bdf4-4911-91fe-096fde46b450" />
 
 10. Once the wizard is opened, a configuration menu opens where I have to choose a combination of services to provide:
 
@@ -1255,59 +1255,59 @@ Implementing VPNs is a best practice for its ability to provide a secure and pri
 
     In this case, I select the first option (Remote Access), since I am only interested in providing the VPN service:
 
-    ![VPN-11](images/vpn11.PNG)
+    <img width="600" height="510" alt="Image" src="https://github.com/user-attachments/assets/ba04bc1f-e94b-4ae1-8c1a-7b5c0f9c48cd" />
 
     Then, I select the “VPN” option:
 
-    ![VPN-12](images/vpn12.PNG)
+    <img width="598" height="504" alt="Image" src="https://github.com/user-attachments/assets/fcd3b612-a2a5-4d9b-a2a6-f8482b512780" />
 
     Now, I must select the interface that connects the server to the Internet. 
 
     In this case, it is the “Ethernet” interface, whose IP address is 192.168.1.6:
 
-    ![VPN-13](images/vpn13.PNG)
+    <img width="600" height="512" alt="Image" src="https://github.com/user-attachments/assets/bb43cd11-ad6e-4445-80db-18bcad2fcab7" />
 
     Now, I must select whether I want the IP addresses of the computers connecting to the VPN to be assigned automatically (via DHCP) or whether I want an IP address to be chosen from a defined range.
 
     In this case, I will select the option “From a specified address range”:
 
-    ![VPN-14](images/vpn14.PNG)
+    <img width="602" height="508" alt="Image" src="https://github.com/user-attachments/assets/3973d058-ee74-4e2a-a33f-db14a8abf8a0" />
 
     Next, I create the range of addresses that I will choose to be assigned to those computers that connect to VPN.
 
     As this is an example case, I will select an agreed range that will only cover 8 IP addresses, from 192.168.1.88 to 192.168.1.95:
 
-    ![VPN-14-2](images/vpn14-2.PNG)
+    <img width="594" height="510" alt="Image" src="https://github.com/user-attachments/assets/6300817c-1677-467b-9581-d11536545554" />
 
     Finally, I check that everything is correct and press “Finish”:
 
-    ![VPN-16](images/vpn16.PNG)
+    <img width="602" height="512" alt="Image" src="https://github.com/user-attachments/assets/579f8b4f-3d62-40e9-a511-369115da9d8b" />
 
     Once this is done, the VPN server will be running: 
 
-    ![VPN-17](images/vpn17.PNG)
+    <img width="750" height="530" alt="Image" src="https://github.com/user-attachments/assets/91c366d1-cbc2-48dc-b164-02bec9d74c95" />
 
 11. Now, to connect to a VPN from a client computer (in this case, JMFSOFT-PC04), I go to the search bar and type VPN.
 
     Then, I select the “VPN Configuration” option:
 
-    ![VPN-CLI1](images/vpncli1.PNG)
+    <img width="942" height="766" alt="Image" src="https://github.com/user-attachments/assets/528075e7-9b3f-453d-a7b0-6d48018861c4" />
 
     Then, I select the “Add a VPN connection” option:
 
-    ![VPN-CLI2](images/vpncli2.PNG)
+    <img width="962" height="762" alt="Image" src="https://github.com/user-attachments/assets/353b1194-7e29-40cd-b67f-4fd4213a35da" />
 
     Then, I fill in the following fields:
 
-    ![VPN-CLI3](images/vpncli3.PNG)
-    ![VPN-CLI4](images/vpncli4.PNG)
+    <img width="962" height="762" alt="Image" src="https://github.com/user-attachments/assets/dc78bccf-2137-4642-9718-300621b58bc0" />
+    <img width="962" height="380" alt="Image" src="https://github.com/user-attachments/assets/784bb16d-6c8c-4726-8a72-71da6ff22a05" />
 
     Once the fields have been filled in, the connection will be saved.
 
     All you have to do is click on connect:
 
-    ![VPN-CLI5](images/vpncli5.PNG)
-    ![VPN-CLI6](images/vpncli6.PNG)
+    <img width="962" height="380" alt="Image" src="https://github.com/user-attachments/assets/784bb16d-6c8c-4726-8a72-71da6ff22a05" />
+    <img width="962" height="380" alt="Image" src="https://github.com/user-attachments/assets/784bb16d-6c8c-4726-8a72-71da6ff22a05" />
 
     As shown in the image, the connection was successful.
 
@@ -1318,7 +1318,7 @@ Implementing VPNs is a best practice for its ability to provide a secure and pri
 
     * I go to CMD or Powershell and type ipconfig /all, and the connection should appear:
 
-      ![VPN-CLI7](images/vpncli7.PNG)
+      <img width="653" height="604" alt="Image" src="https://github.com/user-attachments/assets/e18659b2-1fcc-4031-9a64-2e88cecb4987" />
 
     From the VPN server side:
 
@@ -1326,8 +1326,6 @@ Implementing VPNs is a best practice for its ability to provide a secure and pri
 
       This section should list all the client computers connected to the VPN:
 
-      ![VPN-CLI8](images/vpncli8.PNG)
-
-This concludes the VPN server configuration.
+      This concludes the VPN server configuration.
   
 -------------------------------------------------------------------------------------------------
