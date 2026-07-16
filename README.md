@@ -1734,3 +1734,198 @@ To integrate Zabbix with Grafana, I perform the following steps:
     <img width="1015" height="399" alt="Image" src="https://github.com/user-attachments/assets/3c8ea29e-e480-4872-860c-0579e9387846" /> <br/>
 
 -------------------------------------------------------------------------------------------------
+
+## Task Automation with PowerShell
+
+PowerShell is a valuable tool for automating tasks in a Help Desk role because it saves time and reduces manual work. Instead of performing repetitive tasks like resetting passwords or creating user accounts one by one, you can automate these processes with scripts, completing them in seconds. This not only speeds up your workflow but also allows you to handle more requests in less time.
+
+Automating with PowerShell also ensures consistency and reduces human error. When tasks are done manually, there’s always a risk of mistakes, but a well-written script guarantees the same accurate result every time. This makes PowerShell an essential tool for ensuring that systems are properly managed and maintained.
+
+Additionally, PowerShell offers flexibility, allowing you to manage different aspects of IT, from Active Directory to software deployment, making it a versatile solution for a wide range of tasks.
+
+<img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/560f21fb-7d26-4c04-858b-853cf3cb187d" />
+
+### Bulk User creation through Powershell
+
+Using PowerShell to create users in Active Directory offers key advantages like automation, allowing repetitive tasks to be performed quickly and consistently, ensuring uniformity across the organization. It also provides scalability, making it efficient to manage large numbers of users, and flexibility to customize attributes during creation, all of which help streamline user management in enterprise environments.
+
+To perform a mass creation of users using Powershell, I must perform the following steps:
+
+1. First, I am going to create a file with .csv (Comma-Separated Value) extension, which will contain the users that I am going to add to Active Directory using Powershell.
+
+    This file, as the name of the extension indicates, will separate each Active Directory attribute by commas (,).
+
+    <img width="1066" height="568" alt="Image" src="https://github.com/user-attachments/assets/505cda9c-1a73-4819-bfaa-749262882870" />
+   
+    
+2. Now, I must prepare the script that imports that .csv file, and run the command that creates the users in Active Directory based on that file.
+
+    First, I import the CSV file. 
+
+    Then, I create some variables that will be useful to pass as parameters to the command that will create the users. 
+
+    In this case, for testing purposes, all users will go to the same OU, and the domain will be one created on a Windows Server 2016 server, named 'adatum.local'.
+
+    <img width="1072" height="735" alt="Image" src="https://github.com/user-attachments/assets/3b5322f0-8f17-49ee-8cbf-175a9b340080" />
+
+
+3. Once the .csv file is loaded in the $users variable, I proceed to go through each one of the users and for each one of them (forEach), I save their data in variables and pass them to the New-ADUser object, which will create the users.
+
+    <img width="674" height="666" alt="Image" src="https://github.com/user-attachments/assets/569983fb-2d75-40bb-ba00-98b53424732e" />
+
+    The console result is as follows:
+
+    <img width="600" height="732" alt="Image" src="https://github.com/user-attachments/assets/8d40841d-e219-4a8a-b24d-58d9a1cd5ec3" />
+
+    And the result of executing the script in Active Directory is this (the user 'Juanma' was already created): 
+
+    <img width="1276" height="652" alt="Image" src="https://github.com/user-attachments/assets/a5bc447a-3b4f-4640-a22e-b15b4095374c" />
+
+
+### Bulk User Disabling through Powershell
+
+To disable users in Powershell, the command 'Disable-ADAccount' is used.
+
+In this case, I will disable those users that belong to the 'IT' department.
+
+The script is simple, since the command only receives the user's identity.
+
+<img width="789" height="912" alt="Image" src="https://github.com/user-attachments/assets/906372b4-3602-4e65-8bac-76960111363c" />
+
+-------------------------------------------------------------------------------------------------
+
+## Project Conclusion
+
+### **Project Overview**:
+
+This project demonstrates my capabilities in setting up and managing a comprehensive IT environment, essential for a role as an IT Support Specialist or Help Desk Jr/Trainee. The core of the project is the creation of a homelab that simulates real-world IT infrastructure, showcasing a range of skills from system administration to network monitoring, user support, and cloud-based services.
+
+### **Tools and Technologies Used**:
+
+1. **Virtualization**:
+  
+    - **Hyper-V**: Used to create and manage multiple virtual machines (VMs), allowing for a dynamic and scalable test environment.
+
+      <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/ad487b10-a743-4293-b2ad-63c090565c78" />
+
+2. **Operating Systems**:
+
+    - **Windows Server 2022**: Deployed as domain controllers and application servers.
+
+      <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/6ebfb882-328b-4843-92f0-dfe33c00a69e" />
+
+    - **Windows 10**: Set up as client machines.  
+    
+      <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/b2183335-11c0-4ce9-a94a-33344b78d96a" />
+
+    - **Linux (Debian)**: Configured for monitoring and visualization.
+
+      <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/0abc0513-d1c4-4d13-a377-4c1db060def5" />
+
+3. **Directory Services**:
+ 
+    - **Active Directory (AD)**: Implemented to manage users, groups, and devices across the network.
+
+      <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/ecba291d-d0fd-4904-909d-c369509e4601" />
+
+    - **Azure Active Directory**: Set up for cloud-based identity and access management.
+
+      <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/745942c7-4877-4a18-8f13-fbde44ec4a54" />
+
+4. **Network and System Management**:
+
+    - **PDQ Deploy**: Utilized for automated software deployment and management.
+
+      <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/92cdc471-bc43-4a36-b408-1eb967d13ebb" />
+
+    - **ADUC (Active Directory Users and Computers)** and **ADAC (Active Directory Administrative Center)**: Employed for detailed management of the AD environment.  
+
+5. **Cloud Services**:
+   
+    - **Microsoft 365**: Implemented and managed user accounts, licenses, and shared mailboxes. Configured services like Exchange, SharePoint, and OneDrive, including recovery of deleted files and mailbox management.
+
+      <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/c33beea3-3fe0-4b68-a751-1cd211ac458b" />
+
+6. **Monitoring and Visualization**:
+   
+    - **Zabbix**: Installed on a Linux VM for network and system monitoring.
+  
+      <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/a5c4a62b-3a05-4752-ae63-b20b5e90deb4" />
+
+    - **Grafana**: Used to create visual dashboards for monitoring data from Zabbix.
+
+      <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/82acdb54-1922-4454-ac8c-a293ad9aad08" />
+
+7. **Remote Access and Support**:
+  
+    - **TeamViewer**: Integrated for remote access and support capabilities, facilitating troubleshooting and user assistance.
+
+      <img width="256" height="256" alt="Image" src="https://github.com/user-attachments/assets/fd908f3f-b085-4575-8b3d-216ac607c54d" />
+
+8.  **VPN Configuration**:
+    
+    - **Remote Access Role (Windows Server)**: Set up a VPN to allow secure remote access to the network, including the configuration of roles and client connectivity.
+   
+      <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/50e601c6-a601-4bcd-872e-c24a1f1f24d0" />
+
+9. **Task Automation**:
+
+    - **Powershell**: PowerShell scripts were used to automate key tasks such as bulk user creation and bulk user disabling in Active Directory, improving efficiency and consistency across the project.
+
+      <img width="200" height="200" alt="Image" src="https://github.com/user-attachments/assets/5f18d897-3ddd-486c-9aa8-258c4cd0af94" />
+
+### Key Project Components:
+
+1. **Homelab Setup**:
+
+    - Created a fully functional homelab consisting of two Windows Server 2022 VMs, four Windows 10 client VMs, and a Linux VM.    
+    - Configured the VMs to replicate a corporate IT environment, including domain joining and policy application.
+
+2. **Active Directory Deployment and Management**:
+
+    - Set up a primary domain controller with Windows Server 2022.
+    - Implemented organizational units (OUs) to mirror departmental structures.
+    - Created user accounts and assigned them to appropriate OUs, simulating real-world departmental hierarchies.
+    - Integrated Group Policy Objects (GPOs) to enforce security policies, manage desktop configurations, and ensure uniformity across the domain.
+  
+3. **Cloud Identity and Security**:
+
+    - Established and configured Azure Active Directory (Azure AD) for cloud-based identity management.
+    - Created and managed cloud-based user accounts and groups.
+    - Enabled Multi-Factor Authentication (MFA) for added security on Azure AD.
+
+4. **System and Software Management**:
+
+    - Utilized PDQ Deploy for centralized software deployment across all Windows clients, demonstrating proficiency in remote software management.
+    - Configured and managed Windows Server roles and features, including DNS, DHCP, and Remote Access.
+
+5. **Microsoft 365 Administration:**:
+    
+    - Managed Microsoft 365 services, including user accounts, license assignments, and group configurations.
+    - Administered Exchange Online for mailbox management, and implemented SharePoint and OneDrive for file storage and collaboration.
+    - Executed recovery operations for deleted files and mailboxes.
+
+6. **Network Monitoring and Visualization**:
+
+    - Installed and configured Zabbix for comprehensive monitoring of all VMs.
+    - Set up Grafana dashboards to visualize monitoring data, providing insights into system performance and health.
+
+7. **IT Service Management**:
+
+    - Implemented Jira Service Management (JSM) as a ticketing system to simulate handling IT support requests.
+    - Managed and resolved simulated tickets, reflecting typical IT support tasks like password resets, software installations, and system troubleshooting.
+
+8. **Remote Access and Support**:
+
+    - Integrated tools like TeamViewer and AnyDesk for remote access and support capabilities.
+    - Demonstrated proficiency in using these tools to resolve user issues remotely, enhancing support efficiency.
+
+9. **VPN Configuration**:
+    
+    - Configured a VPN to provide secure remote access to network resources, including role-based access controls and client setup.
+
+10. **Task Automation with Powershell**:
+
+    - Automated key tasks such as bulk user creation and bulk user disabling in Active Directory, reducing manual intervention and improving efficiency.
+  
+-------------------------------------------------------------------------------------------------
