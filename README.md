@@ -1578,13 +1578,13 @@ In this case, I will choose to install from the apt package manager, for the sak
 
 Another option is to install by downloading and installing a ".deb" file, which has advantages such as access to the latest version and full control of the installation.
 
-![Grafana 1](images/grf1.PNG)
+<img width="775" height="520" alt="Image" src="https://github.com/user-attachments/assets/0a5ba17c-12f2-4f0e-892d-0009fec313a1" />
 
 To start with the installation, I perform the following steps:
 
-![Grafana 2](images/grf2.PNG)
+<img width="681" height="195" alt="Image" src="https://github.com/user-attachments/assets/9036f791-1628-427f-8e35-d5e70a94deb6" />
 
-![Grafana 3](images/grf3.PNG)
+<img width="865" height="452" alt="Image" src="https://github.com/user-attachments/assets/c5bd08e3-afb0-4e82-b5cd-045f0f896f74" />
 
 The packages installed in the above image are required as they provide the following:
 
@@ -1592,9 +1592,9 @@ The packages installed in the above image are required as they provide the follo
   - **software-properties-common**: Provides additional tools to manage software repositories.
   - **wget**: Used to download files from the command line.
 
-![Grafana 4](images/grf4.PNG)
+<img width="770" height="198" alt="Image" src="https://github.com/user-attachments/assets/83d162c1-6bba-4a15-aafa-82a456a9622b" />
 
-![Grafana 5](images/grf5.PNG)
+<img width="897" height="181" alt="Image" src="https://github.com/user-attachments/assets/ff875cb7-ea14-418b-9b49-ab6ee10f7017" />
 
 These commands are used to add the Grafana GPG (Gnu Privacy Guard) key to the system, allowing to verify the authenticity of the packages downloaded from the Grafana repository. 
 
@@ -1604,18 +1604,18 @@ These commands are used to add the Grafana GPG (Gnu Privacy Guard) key to the sy
 
 The last command (**ls -l /etc/apt/keyrings/**) was executed only to verify that the key was downloaded correctly.
 
-![Grafana 6](images/grf6.PNG)
+<img width="793" height="169" alt="Image" src="https://github.com/user-attachments/assets/475fb0a6-6c4f-469e-9af2-63aa67722cbf" />
 
-![Grafana 7](images/grf7.PNG)
+<img width="895" height="102" alt="Image" src="https://github.com/user-attachments/assets/76089d7d-c4de-42f6-9929-1271e122688f" />
 
 The command
   - **echo "deb [signed-by=/etc/apt/keyrings/grafana.gpg] https://apt.grafana.com stable main" | sudo tee -a /etc/apt/sources.list.d/grafana.list** 
 
 is used to add a Grafana repository line to the apt source configuration file on Debian-based systems (such as Ubuntu).
 
-![Grafana 8](images/grf8.PNG)
+<img width="771" height="178" alt="Image" src="https://github.com/user-attachments/assets/a836fe89-b80e-4c7e-863e-c17ac630769b" />
 
-![Grafana 9](images/grf9.PNG)
+<img width="697" height="220" alt="Image" src="https://github.com/user-attachments/assets/2da9b814-aef2-419a-b826-eacf4dd691cb" />
 
 Now, I ran the command   
   
@@ -1625,9 +1625,9 @@ to update the list of available packages.
 
 When you run "sudo apt-get update", the system contacts each of the repositories listed in /etc/apt/sources.list and in the files inside the /etc/apt/sources.list.d/ directory (such as grafana.list that we configured earlier).
 
-![Grafana 10](images/grf10.PNG)
+<img width="769" height="180" alt="Image" src="https://github.com/user-attachments/assets/d012aec1-97b8-4522-87dc-c4a372ab8ef4" />
 
-![Grafana 11](images/grf11.PNG)
+<img width="745" height="489" alt="Image" src="https://github.com/user-attachments/assets/ae7311f8-e74b-4308-8658-d46a9cbafd3d" />
 
 The 
 
@@ -1635,7 +1635,7 @@ The
   
 command is used to install Grafana on a Debian-based system, such as Ubuntu.
 
-![Grafana 12](images/grf12.PNG)
+<img width="723" height="137" alt="Image" src="https://github.com/user-attachments/assets/161ed38f-e87c-4c6e-9f95-0f8436d4f79f" />
 
 Finally, I run the command
 
@@ -1643,7 +1643,7 @@ Finally, I run the command
 
 to verify that grafana was installed correctly.
 
-![Grafana 13](images/grf13.PNG)
+<img width="725" height="384" alt="Image" src="https://github.com/user-attachments/assets/20b29af6-9b71-49e9-adf3-a5917bd761a5" />
 
 Finally I run the commands  
 
@@ -1658,14 +1658,14 @@ The systemctl enable grafana-server command is used to configure Grafana to star
 
 To access the Grafana web portal, I go to the address (localhost:3000) or simply use my hostname (deb-mon01:3000) or my ip address (192.168.0.7:3000):
 
-![Grafana 14](images/grf14.PNG)
+<img width="1024" height="604" alt="Image" src="https://github.com/user-attachments/assets/7f0adf06-e5b3-4254-bb52-c4c9b34b1c30" />
 
 By default, I can login with the following credentials:
 
     - user: admin
     - password: admin
 
-![Grafana 15](images/grf15.PNG)
+<img width="1024" height="605" alt="Image" src="https://github.com/user-attachments/assets/97de57b4-26a3-4037-a9ac-ae622bb710c0" />
 
 Now, I must integrate Zabbix with Grafana. 
 
@@ -1680,20 +1680,20 @@ To integrate Zabbix with Grafana, I perform the following steps:
 1. First, I verify that all the devices are recognized in Zabbix. 
   To verify this, I go to deb-mon01/zabbix/, then inside the web interface I go to Data Collection and then Hosts.
   In this case, I have 2 virtual machines turned off (JMFSOFT-PC03 and JMFSOFT-PC04) for a lack of resources, but in a real environment they would all be on. <br/><br/>
-  ![Grafana 16](images/grf16.PNG)
+<img width="968" height="262" alt="Image" src="https://github.com/user-attachments/assets/e3b6ebb9-a9b8-4d99-b376-5dc42dcd0ec2" />
 
 2. Then, once this is confirmed, I must log in to the Grafana web interface.
   To do this, I go to deb-mon01:3000: <br/><br/>
-  ![Grafana 17](images/grf17.PNG)
+   <img width="1021" height="596" alt="Image" src="https://github.com/user-attachments/assets/66d27de8-e42b-447c-8352-d75d062e2d3f" />
 
 3. Once this is done, in the left panel, I go to Administration --> Plugins: <br/><br/>
-   ![Grafana 18](images/grf18.PNG) <br/><br/>
+   <img width="566" height="438" alt="Image" src="https://github.com/user-attachments/assets/a2eaf927-36c1-452c-b4dd-e01447ab6cd6" /> <br/><br/>
    Inside Plugins, I look for the "Zabbix" plugin and install it: <br/><br/>
-   ![Grafana 19](images/grf19.PNG) <br/><br/>
+   <img width="1017" height="526" alt="Image" src="https://github.com/user-attachments/assets/208aa5f8-8f2e-40ef-870a-1de5a26e8ee3" /> <br/><br/>
 
 4. Now, once the plugin is installed and enabled, I must restart the grafana-server service, with the following command:
     - **sudo systemctl restart grafana-server** <br/><br/> 
-    ![Grafana20](images/grf20.PNG) <br/><br/> 
+   <img width="738" height="352" alt="Image" src="https://github.com/user-attachments/assets/77d34eec-af23-4612-bdc0-2aa3d75412dc" /> <br/><br/> 
 
 5. Now, I must link the Grafana service to Zabbix. <br/>
   Within the web interface, from the Connection console, I go to Data Sources and then select "Add Data Source".<br/> <br/> 
@@ -1706,12 +1706,12 @@ To integrate Zabbix with Grafana, I perform the following steps:
 
     Although it is recommended to create a dedicated account especially for this instead of using the "Admin" account, for the sake of simplicity, I have decided to use the Admin account.
 
-    ![Grafana21](images/grf21.PNG) <br/><br/> 
-    ![Grafana22](images/grf22.PNG) <br/>
+    <img width="1016" height="525" alt="Image" src="https://github.com/user-attachments/assets/89bb3647-2b14-40c2-80f9-197a0a9d1f4d" /> <br/><br/> 
+    <img width="405" height="248" alt="Image" src="https://github.com/user-attachments/assets/51407b1b-9271-44be-b779-72d7fcc8ac51" /> <br/>
 
     Once this is saved, a green banner should be displayed indicating that you have successfully connected to the data source. <br/> If not, a red banner is displayed indicating an error.
     
-    ![Grafana23](images/grf23.PNG) <br/>
+    <img width="998" height="358" alt="Image" src="https://github.com/user-attachments/assets/abefd43e-b056-48d2-9f88-f070f1e22fc1" /> <br/>
 
 6. Once the connection with the data source is made, I can proceed with the creation of Dashboards.
    
@@ -1719,7 +1719,7 @@ To integrate Zabbix with Grafana, I perform the following steps:
     For example: DC01.
     Then, I fill in the "**Item**" field with the item I want to monitor. For example, if I want to see the CPU utilization, I fill in "Windows: CPU Utilization":
 
-    ![Grafana24](images/grf24.PNG) <br/>
+    <img width="1024" height="507" alt="Image" src="https://github.com/user-attachments/assets/a6a097bc-5877-49d9-b195-667ee98d491b" /> <br/>
 
     In this case, the usefulness of the graph cannot be fully appreciated since the server was inactive and therefore the CPU utilization is practically null, but in a real environment its use could be analyzed over time.
 
@@ -1731,6 +1731,6 @@ To integrate Zabbix with Grafana, I perform the following steps:
 7. Finally, I created another panel and added it to the dashboard.
   This completes the installation of Zabbix, the installation of Grafana, and the subsequent integration of Zabbix with Grafana for visualization.
 
-    ![Grafana25](images/grf25.PNG) <br/>
+    <img width="1015" height="399" alt="Image" src="https://github.com/user-attachments/assets/3c8ea29e-e480-4872-860c-0579e9387846" /> <br/>
 
 -------------------------------------------------------------------------------------------------
