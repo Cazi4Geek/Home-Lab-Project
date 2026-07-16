@@ -1439,28 +1439,28 @@ To run the following commands, you need to open a terminal, which allows you to 
 The first command (**wget**) downloads the Zabbix 6.4 .deb package, which is then installed with the next command (**dpkg -i**). <br/>
 Finally, **apt update** is run, which updates the list of available packages and their versions from the configured repositories. This ensures that the system has the most up-to-date information about the packages available for installation or upgrade.
 
-![Zabbix 3](images/zbx3.PNG)
+<img width="990" height="369" alt="Image" src="https://github.com/user-attachments/assets/20d8bfe9-4c06-458b-a02c-4900cb9b2a56" />
 
-![Zabbix 4](images/zbx4.PNG)
+<img width="989" height="268" alt="Image" src="https://github.com/user-attachments/assets/f40ff6d5-2e45-4469-922f-9b43bc0ec99a" />
 
-![Zabbix 5](images/zbx5.PNG)
+<img width="991" height="347" alt="Image" src="https://github.com/user-attachments/assets/1b729da1-e349-4a4c-b88d-4d9019ffb03f" />
 
 Once these commands are executed, we proceed to install the Zabbix server, frontend, and agent:
 
-![Zabbix 6](images/zbx6.PNG)
+<img width="1091" height="111" alt="Image" src="https://github.com/user-attachments/assets/ab412de2-439b-47a4-9312-6295025fff23" />
 
 After executing the command, I will be prompted to confirm the installation of the listed packages. To confirm, type 'y' (for yes) and press enter. Alternatively, I could skip this prompt by adding the -y parameter to the original command.
 
-![Zabbix 7](images/zbx7.PNG)
+<img width="987" height="553" alt="Image" src="https://github.com/user-attachments/assets/c2e757c8-5e94-44d8-a5fd-ad98484b310d" />
 
 Once this is done, I proceed to create the initial database in MySQL:
 
-![Zabbix 8](images/zbx8.PNG)
+<img width="1127" height="320" alt="Image" src="https://github.com/user-attachments/assets/956d5cab-9eca-4743-ada2-f632ca05623e" />
 
 In this case, Debian 12.5 uses MariaDB (a MySQL fork compatible with most applications that use MySQL) instead of MySQL.
 Because of this, I will use the equivalent commands for the MariaDB database.
 
-![Zabbix 9](images/zbx9.PNG)
+<img width="910" height="450" alt="Image" src="https://github.com/user-attachments/assets/9e3e49c6-494f-46d0-973b-d6aad02a82c5" />
 
 The commands executed in the image perform the following actions:
 
@@ -1474,104 +1474,101 @@ The commands executed in the image perform the following actions:
   
 - **set global log_bin_trust_function_creators = 1;**: Enables the safe execution of user-defined functions (UDF) in a binary log replication environment. This is necessary to allow Zabbix, which often uses user-defined functions, to function correctly in database replication environments.
 
-![Zabbix 10](images/zbx10.PNG)
+<img width="1087" height="121" alt="Image" src="https://github.com/user-attachments/assets/0dc2ba00-d458-4d39-ba11-b06d80ea9ea6" />
 
-![Zabbix 11](images/zbx11.PNG)
+<img width="909" height="143" alt="Image" src="https://github.com/user-attachments/assets/2fdec6ec-f97f-4f93-8b04-e21c406cb27b" />
 
 The command "**zcat /usr/share/zabbix-sql-scripts/mysql/server.sql.gz | sudo mariadb -u zabbix -p zabbix --default-character-set=utf8mb4**" is used to import a gzip-compressed database file into MariaDB, specifically for the Zabbix monitoring system.
 
 In this command, the file "/usr/share/zabbix-sql-scripts/mysql/server.sql.gz" is decompressed using zcat and then imported into MariaDB. The command is prefixed with "sudo" to execute it with superuser privileges, ensuring sufficient permissions to perform the import. "-u zabbix" specifies that the user "zabbix" will be used to connect to MariaDB, and "-p zabbix" indicates that the password for the user "zabbix" will be used. The option "--default-character-set=utf8mb4" ensures that UTF-8 character set encoding is used.
 
-![Zabbix 12](images/zbx12.PNG)
+<img width="1101" height="191" alt="Image" src="https://github.com/user-attachments/assets/60973b64-03e6-420c-9106-48f104f5d0f0" />
 
-![Zabbix 13](images/zbx13.PNG)
+<img width="909" height="346" alt="Image" src="https://github.com/user-attachments/assets/7897e08b-efb2-40fd-9ac0-9d01e59522df" />
 
 Executing the command "**SET GLOBAL log_bin_trust_function_creators = 0;**" sets the parameter to 0. This parameter controls whether non-superuser accounts can create user-defined functions when binary replication (log_bin) is enabled. Setting it to 0 restricts this capability, ensuring tighter control over the functions created in the database.
 
 After performing these steps, it is necessary to configure the database for the Zabbix server:
 
-![Zabbix 14](images/zbx14.PNG)
+<img width="1102" height="154" alt="Image" src="https://github.com/user-attachments/assets/2d57dde2-b059-4673-9f8d-f0b65c8b5859" />
 
-![Zabbix 15](images/zbx15.PNG)
+<img width="895" height="457" alt="Image" src="https://github.com/user-attachments/assets/446ad958-bf40-4987-97b6-7b745160a847" />
 
 Now that everything is configured, I need to restart the 'zabbix-server', 'zabbix-agent', and 'apache2' services using **systemctl restart**. Additionally, I will enable them to start automatically at system boot using **systemctl enable**.
 
-![Zabbix 16](images/zbx16.PNG)
+<img width="1104" height="165" alt="Image" src="https://github.com/user-attachments/assets/6c6a44b9-aff4-4472-bea9-33f98cdbb21b" />
 
-![Zabbix 17](images/zbx17.PNG)
+<img width="911" height="305" alt="Image" src="https://github.com/user-attachments/assets/85dfa883-9d64-48cc-8132-55ddd6eb27d3" />
 
 Once the services are restarted and enabled, I proceed to open the Zabbix web interface (Zabbix UI) by accessing the link http://[host]/zabbix.
 In this case, the hostname is: deb-mon01, but if I don't know it, I can run the command 'hostname'.
 
-![Zabbix 18](images/zbx18.PNG)
+<img width="724" height="81" alt="Image" src="https://github.com/user-attachments/assets/9208a52b-0190-4b42-9711-7125cad93af0" />
 
-![Zabbix 19](images/zbx19.PNG)
+<img width="262" height="47" alt="Image" src="https://github.com/user-attachments/assets/fafec2ba-0d3c-4bae-a990-7be3620a31f8" />
 
-![Zabbix 20](images/zbx20.PNG)
+<img width="1017" height="656" alt="Image" src="https://github.com/user-attachments/assets/fa093d97-3485-41a3-8c9d-8bab54ba361b" />
 
 Once the language is selected, I click 'Next Step' and verify that all prerequisites are met (in this case, as shown in the image, all are satisfactorily met):
 
-![Zabbix 21](images/zbx21.PNG)
+<img width="838" height="494" alt="Image" src="https://github.com/user-attachments/assets/caa0bd0d-c5d9-4147-b0ef-63b3b83bac4a" />
 
 Now, I configure the database connection.
 In this case, I just need to verify that the username is correct (zabbix), and I must fill in the password with the one used previously (Test.123):
 
-![Zabbix 22](images/zbx22.PNG)
+<img width="828" height="502" alt="Image" src="https://github.com/user-attachments/assets/01735729-016a-4d1d-9855-cf0c1c08caf0" />
 
 Now, I need to fill in the Zabbix web server name, set the time zone, and choose the web interface theme. In this case, I opted for the name "Zabbix Server - Buenos Aires Office" to identify the Zabbix server. It's a clear and descriptive name indicating the purpose and location of the server.
 
 The time zone is (UTC-03:00) America/Argentina/Buenos Aires, and the chosen theme is 'Blue'.
 
-![Zabbix 23](images/zbx23.PNG)
+<img width="833" height="494" alt="Image" src="https://github.com/user-attachments/assets/dca2ca91-3fb6-4c74-b432-aa34b4ed22f0" />
 
 Finally, a summary of the selected configurations is displayed. I verify that everything is correct and then click 'Next Step'.
 
-![Zabbix 24](images/zbx24.PNG)
+<img width="824" height="488" alt="Image" src="https://github.com/user-attachments/assets/5c2a7fc8-357b-493c-b1dc-df8dbee3927d" />
 
 Then, a message appears indicating that the Zabbix server has been successfully configured and installed.
 
-![Zabbix 25](images/zbx25.PNG)
+<img width="828" height="491" alt="Image" src="https://github.com/user-attachments/assets/5bf202ac-ecba-4012-8a08-19ae49e4c096" />
 
 Once 'Finish' is pressed, I am redirected to a login where I must enter the following credentials:
 
 **Username**: Admin <br/>
 **Password**: zabbix
 
-![Zabbix 26](images/zbx26.PNG)
+<img width="389" height="434" alt="Image" src="https://github.com/user-attachments/assets/298e6509-fbe2-4fd4-9ca5-2da264950336" />
 
 Once this is done, I conclude with the configuration and installation of the Zabbix server. Now, the only thing left is to install the client on the machines I want to monitor or discover them automatically on the network.
-
-![Zabbix 27](images/zbx27.PNG)
+<img width="1023" height="636" alt="Image" src="https://github.com/user-attachments/assets/d76ca9df-cdab-4564-9be3-4fd4626a5665" />
 
 Once installed on Linux, I proceed to download the agent on Windows. <br/>
 In this case, I will install and configure the agent manually on each machine, but I could do it using PDQ Deploy from SV02.
 
-![Zabbix 28](images/zbx28.PNG)
+<img width="1234" height="626" alt="Image" src="https://github.com/user-attachments/assets/32b6a143-a3a6-46e8-8e17-9fe79ac23a88" />
 
 Once downloaded and started, I must indicate the IP address of the Zabbix server (i.e. the Debian 12.5 machine where I installed the Zabbix server).
 In this case, I can verify this information using the ip address show command (or ip a s for short).
 
-![Zabbix 29](images/zbx29.PNG)
+<img width="735" height="410" alt="Image" src="https://github.com/user-attachments/assets/211a4740-fa22-4305-86a5-fc6101e8063b" />
 
-![Zabbix 30](images/zbx30.PNG)
+<img width="510" height="427" alt="Image" src="https://github.com/user-attachments/assets/a65ca862-1b06-480f-9c0a-f47ce97ad518" />
 
 Then, I press 'Next' and finish the agent installation. After that, I proceed to repeat this process on the other machines (DC01, JMFSOFT-PC01, JMFSOFT-PC02, JMFSOFT-PC03, JMFSOFT-PC04).
 
-![Zabbix 31](images/zbx31.PNG)
+<img width="512" height="403" alt="Image" src="https://github.com/user-attachments/assets/161ecb42-553f-4f2c-ad21-c1417986e6d7" />
 
 Before installing it on the other machines, I can verify that it has been installed and is working correctly by checking in the Windows Services:
 
-![Zabbix 32](images/zbx32.PNG)
-
 Then, I proceed to add the host to which I have just installed the agent with its corresponding data (Name: SV02, IP: 192.168.1.6, etc.).
 
-![Zabbix 33](images/zbx33.PNG)
+<img width="977" height="575" alt="Image" src="https://github.com/user-attachments/assets/616128bc-dc96-40bd-a0ff-6616e33c3b32" />
 
-![Zabbix 34](images/zbx34.PNG)
+<img width="844" height="99" alt="Image" src="https://github.com/user-attachments/assets/4cf9e0c6-3d74-46bf-9354-29ee9fd17146" />
 
 From now on, I can collect information from the SV02 server, and visualize it from MON01 (Linux Debian 12.5):
 
-![Zabbix 35](images/zbx35.PNG)
+<img width="782" height="296" alt="Image" src="https://github.com/user-attachments/assets/c99ff706-11f9-4f2a-adf7-f51bfc1f1ac8" />
 
 ### Grafana Installation
 
